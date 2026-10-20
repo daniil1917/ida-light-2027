@@ -1,0 +1,41 @@
+{
+  "ok": true,
+  "verb": "build",
+  "project": "ida",
+  "file": "/Users/god/Documents/ChatGPT/Игра Ида Лайт/assets/buildings/projects/ida/build/model.glb",
+  "style": "modern",
+  "textures": "off",
+  "size": {
+    "width": 12,
+    "depth": 10.6,
+    "height": 6.76
+  },
+  "meshes": 3,
+  "nodes": 3,
+  "triangles": 48,
+  "materials": 5,
+  "bytes": 10012,
+  "supports": [
+    {
+      "band": "body",
+      "on": "ground",
+      "share": 1,
+      "offCentre": false,
+      "widerThanBelow": false,
+      "reads": "rests on 100% of ground"
+    },
+    {
+      "band": "crown",
+      "on": "body",
+      "share": 1,
+      "offCentre": false,
+      "widerThanBelow": false,
+      "reads": "rests on 100% of body"
+    }
+  ],
+  "validator": {
+    "errors": 0,
+    "warnings": 1,
+    "infos": 5
+  }
+}

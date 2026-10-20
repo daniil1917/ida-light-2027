@@ -1,0 +1,65 @@
+[
+  {
+    "x": 0.02,
+    "y": 0.02,
+    "canvasHidden": null,
+    "transform": "transform: rotateX(7.2496deg) rotateY(-7.2858deg) scale(1.02178);",
+    "image": "winter-022-foil-2-2.jpg"
+  },
+  {
+    "x": 0.5,
+    "y": 0.02,
+    "canvasHidden": null,
+    "transform": "transform: rotateX(8.5453deg) rotateY(-0.5349deg) scale(1.02491);",
+    "image": "winter-022-foil-50-2.jpg"
+  },
+  {
+    "x": 0.98,
+    "y": 0.02,
+    "canvasHidden": null,
+    "transform": "transform: rotateX(7.5918deg) rotateY(7.1452deg) scale(1.02126);",
+    "image": "winter-022-foil-98-2.jpg"
+  },
+  {
+    "x": 0.02,
+    "y": 0.5,
+    "canvasHidden": null,
+    "transform": "transform: rotateX(0.4989deg) rotateY(-7.5883deg) scale(1.02488);",
+    "image": "winter-022-foil-2-50.jpg"
+  },
+  {
+    "x": 0.5,
+    "y": 0.5,
+    "canvasHidden": null,
+    "transform": "transform: rotateX(0.0388deg) rotateY(-0.8944deg) scale(1.02499);",
+    "image": "winter-022-foil-50-50.jpg"
+  },
+  {
+    "x": 0.98,
+    "y": 0.5,
+    "canvasHidden": null,
+    "transform": "transform: rotateX(-0.0147deg) rotateY(7.0769deg) scale(1.02133);",
+    "image": "winter-022-foil-98-50.jpg"
+  },
+  {
+    "x": 0.02,
+    "y": 0.98,
+    "canvasHidden": null,
+    "transform": "transform: rotateX(-7.8716deg) rotateY(-7.269deg) scale(1.02486);",
+    "image": "winter-022-foil-2-98.jpg"
+  },
+  {
+    "x": 0.5,
+    "y": 0.98,
+    "canvasHidden": null,
+    "transform": "transform: rotateX(-8.5606deg) rotateY(-0.7704deg) scale(1.02499);",
+    "image": "winter-022-foil-50-98.jpg"
+  },
+  {
+    "x": 0.98,
+    "y": 0.98,
+    "canvasHidden": null,
+    "transform": "transform: rotateX(-7.7937deg) rotateY(6.8952deg) scale(1.0222);",
+    "image": "winter-022-foil-98-98.jpg"
+  }
+]

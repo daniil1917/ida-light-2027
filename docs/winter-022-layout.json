@@ -1,0 +1,92 @@
+{
+  "introDesktop": {
+    "gutter": "36px",
+    "items": [
+      {
+        "left": 36,
+        "right": 36,
+        "selector": ".brand-header"
+      },
+      {
+        "left": 36,
+        "right": 36,
+        "selector": ".intro-copy"
+      },
+      {
+        "left": 36,
+        "right": 36,
+        "selector": ".intro-action"
+      }
+    ],
+    "width": 600
+  },
+  "postcardMobile": {
+    "gutter": "20px",
+    "items": [
+      {
+        "fill": "rgb(255, 255, 255)",
+        "left": 20,
+        "right": 20,
+        "selector": ".brand-header",
+        "width": 350
+      },
+      {
+        "fill": "rgb(36, 91, 243)",
+        "left": 20,
+        "right": 20,
+        "selector": ".postcard-controls",
+        "width": 350
+      },
+      {
+        "fill": "rgb(36, 91, 243)",
+        "left": 20,
+        "right": 20,
+        "selector": ".postcard-controls > button:first-child",
+        "width": 350
+      },
+      {
+        "fill": "rgb(255, 255, 255)",
+        "left": 20,
+        "right": 20,
+        "selector": ".postcard-replay",
+        "width": 350
+      }
+    ],
+    "width": 390
+  },
+  "postcardSmall": {
+    "gutter": "16px",
+    "items": [
+      {
+        "bottom": 60,
+        "left": 16,
+        "right": 16,
+        "selector": ".brand-header",
+        "width": 288
+      },
+      {
+        "bottom": 552,
+        "left": 16,
+        "right": 16,
+        "selector": ".postcard-controls",
+        "width": 288
+      },
+      {
+        "bottom": 492,
+        "left": 16,
+        "right": 16,
+        "selector": ".postcard-controls > button:first-child",
+        "width": 288
+      },
+      {
+        "bottom": 552,
+        "left": 16,
+        "right": 16,
+        "selector": ".postcard-replay",
+        "width": 288
+      }
+    ],
+    "width": 320
+  },
+  "idleStyle": "transform: rotateX(-0.0216deg) rotateY(-0.0284deg) scale(1.025);"
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#132552"/><stop offset=".48" stop-color="#294d91"/><stop offset=".83" stop-color="#a6bfdf"/><stop offset="1" stop-color="#dce5ef"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#fff" stop-opacity=".33"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <g id="star" fill="#fff"><path d="m0-5 1.5 3.5L5 0 1.5 1.5 0 5-1.5 1.5-5 0-1.5-1.5Z"/></g>
+    <g id="pine"><path d="M0-160-40-82h20L-58-25h29L-74 35H74L29-25h29L20-82h20Z" fill="#526f99"/><path d="m0-160-30 60h60Zm0 50-41 68h82Zm0 55L-53 17H53Z" fill="#e4edf6"/><path d="M-6 35H6V68H-6Z" fill="#526f99"/></g>
+  </defs>
+  <path fill="url(#sky)" d="M0 0H800V1200H0Z"/>
+  <circle cx="740" cy="610" r="320" fill="url(#halo)"/>
+  <g opacity=".42"><use href="#star" x="90" y="205"/><use href="#star" x="680" y="140"/><use href="#star" x="420" y="295"/><use href="#star" x="735" y="330"/><use href="#star" x="75" y="505"/><use href="#star" x="615" y="560"/><use href="#star" x="260" y="400"/><use href="#star" x="340" y="180"/><use href="#star" x="535" y="60"/></g>
+  <g fill="#fff" opacity=".3"><circle cx="120" cy="370" r="2"/><circle cx="620" cy="270" r="1.5"/><circle cx="280" cy="100" r="2"/><circle cx="760" cy="455" r="2"/><circle cx="410" cy="470" r="1.5"/><circle cx="165" cy="665" r="2"/><circle cx="700" cy="685" r="1.5"/></g>
+  <path d="M0 855Q175 755 370 868T800 810V1200H0Z" fill="#91acce"/>
+  <g opacity=".65"><use href="#pine" transform="translate(40 845) scale(.6)"/><use href="#pine" transform="translate(150 885) scale(.8)"/><use href="#pine" transform="translate(750 800) scale(.68)"/><use href="#pine" transform="translate(660 875) scale(.9)"/><use href="#pine" transform="translate(525 930) scale(.55)"/></g>
+  <path d="M0 980Q170 910 330 986T800 942V1200H0Z" fill="#dce5ef"/>
+  <use href="#pine" transform="translate(65 1010) scale(1.12)"/><use href="#pine" transform="translate(745 980) scale(1.25)"/>
+  <g fill="#fff0c4"><circle cx="40" cy="925" r="4"/><circle cx="87" cy="960" r="4"/><circle cx="32" cy="997" r="4"/><circle cx="742" cy="855" r="4"/><circle cx="700" cy="920" r="4"/><circle cx="780" cy="956" r="4"/></g>
+  <path d="M0 1120Q240 1030 440 1120T800 1080V1200H0Z" fill="#eef3f8"/>
+</svg>

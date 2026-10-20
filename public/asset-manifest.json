@@ -1,0 +1,137 @@
+[
+  {
+    "path": "models/ida-base.glb",
+    "bytes": 19936,
+    "sha256": "94f0273130a677bb40f0756ad7cebcdb2a034c5a50b6cd2ed1007e7b42931f50"
+  },
+  {
+    "path": "models/ida-city.glb",
+    "bytes": 183656,
+    "sha256": "203c4e315104428457b837407fafcfc22e6a1df921747b185819034d7abc442c"
+  },
+  {
+    "path": "models/ida-crane.glb",
+    "bytes": 36020,
+    "sha256": "29509382590370a51057a8ac91efed6de637d679b6e9a261ef9c3a08bf3a5022"
+  },
+  {
+    "path": "models/ida-floor-a.glb",
+    "bytes": 20908,
+    "sha256": "4aff8848afc0a86f61b9879a9d8912df87af4b9c6959de394fec3f997d62c03f"
+  },
+  {
+    "path": "models/ida-floor-b.glb",
+    "bytes": 23964,
+    "sha256": "c390f80de1fc602ea0e3948a3cd077a01169c5eceaa455e33b9bedd1b79b629a"
+  },
+  {
+    "path": "models/ida-floor-c.glb",
+    "bytes": 23180,
+    "sha256": "95a07ba737c27eed058be18d77a576797e6fc3235add66ab2fc866d2013d48a8"
+  },
+  {
+    "path": "models/ida-floor-special.glb",
+    "bytes": 23468,
+    "sha256": "0c61edf0011a131566ea47a73718d0715efca213d80c9bf44e4d5a5c25d31d95"
+  },
+  {
+    "path": "models/ida-holiday-trim.glb",
+    "bytes": 50044,
+    "sha256": "afaa6c69e56da1d9c47931510fa6d665fbd3d72eeb2217b476bf079d5003665b"
+  },
+  {
+    "path": "models/ida-quarter-baked.glb",
+    "bytes": 1211580,
+    "sha256": "0fe8f31dcfa06d2d02daa3abf0fd8a2d6e0160c3866973083ef1780b4dde2afa"
+  },
+  {
+    "path": "models/ida-roof.glb",
+    "bytes": 16440,
+    "sha256": "4ae7b672deff264aa034c8e1a9e72752decd69bc4dd610cce74b5c3886b374e5"
+  },
+  {
+    "path": "textures/concrete-color.webp",
+    "bytes": 886,
+    "sha256": "f0d2ac3bdc53d59c24af9603a703bce9f9301d87f38da8bebd39b5c76fae9ee2"
+  },
+  {
+    "path": "textures/concrete-normal.webp",
+    "bytes": 80904,
+    "sha256": "0d2286d821c03e47d47fc6e7fd8ba19490e9795bd299685dc88b0a2ebe902ff1"
+  },
+  {
+    "path": "textures/concrete-roughness.webp",
+    "bytes": 804,
+    "sha256": "13c8fc295fd7bb52e6652dcee2012f126e0297a37e2771c02a13c278b71c16ff"
+  },
+  {
+    "path": "textures/contact-shadow.svg",
+    "bytes": 373,
+    "sha256": "1d0db7c883f3cc0edb305b9b430e62e39b0958f2829b8f093bc760dca5a423a9"
+  },
+  {
+    "path": "textures/lamplight.svg",
+    "bytes": 364,
+    "sha256": "6d5acd365a9afa24f60b24aace5d7ebc4ef8428aca79b7a825c712261fdbef84"
+  },
+  {
+    "path": "textures/quarter-light.webp",
+    "bytes": 534098,
+    "sha256": "9bc625202505efc2375c7f33d04d498fe1fc007ec055827bd79849c27b9ce3d4"
+  },
+  {
+    "path": "textures/window-light.png",
+    "bytes": 511,
+    "sha256": "3fde83eaeac3825ffad967f7ebb80ae7380b1d888cd860153d38d7c207cb02ca"
+  },
+  {
+    "path": "textures/window-room.svg",
+    "bytes": 677,
+    "sha256": "381cf3ac71bc1f64e704074d0ff996f97828677799edd194176642e3e87a182b"
+  },
+  {
+    "path": "fonts/Euclid-NOTICE.txt",
+    "bytes": 314,
+    "sha256": "bbab529596f328646827e96fb8636dad651de79ba84e99fd5e188e4e8e34a472"
+  },
+  {
+    "path": "fonts/euclid-circular-a-light.woff2",
+    "bytes": 30116,
+    "sha256": "5cc8c99cddae644f58f89fd27aab92624253e634dde1f6fd788d6e04d97a9fc4"
+  },
+  {
+    "path": "fonts/euclid-circular-a-medium.woff2",
+    "bytes": 33260,
+    "sha256": "141fe27acdccb6e427f1b953c99853003d7ec15f1e045b959b8a2af38cf1ac20"
+  },
+  {
+    "path": "fonts/euclid-circular-a-regular.woff2",
+    "bytes": 32740,
+    "sha256": "68b9c70f838ac86476fda891d10a7913dd65ec60afcbff95b4515a5571204871"
+  },
+  {
+    "path": "fonts/euclid-circular-a-semibold.woff2",
+    "bytes": 33536,
+    "sha256": "44fe82e751c9026c7b1cb2e8130f2f5c6c3f5ff38306ace7eb26c551507a02d4"
+  },
+  {
+    "path": "fonts/ida-euclid-digits.typeface.json",
+    "bytes": 857,
+    "sha256": "dccb470a7cd8f28ae784a279d3747dc4b02b276620fdacd615e824909d673db4"
+  },
+  {
+    "path": "branding/ida-logo.svg",
+    "bytes": 2048,
+    "sha256": "86d2777a82318d83644855306bb1580b4804f45cb3e1441449a84ea6f83b6e96"
+  },
+  {
+    "path": "branding/provenance.json",
+    "bytes": 232,
+    "sha256": "2750e6735ee2ff6a4d23633172fe04e0e6d03a0dc8196ebe5ce431971a68fc14"
+  },
+  {
+    "path": "branding/winter-sky.svg",
+    "bytes": 2388,
+    "sha256": "47165f14ab8500733bba2d469c36047e593b8044b5b38875d3a3be0082e2ec45"
+  }
+]

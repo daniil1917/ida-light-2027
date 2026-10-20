@@ -1,0 +1,21 @@
+node_modules/
+dist/
+dist-next/
+dist-pages/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+.DS_Store
+coverage/
+.cache/
+
+releases/
+
+# Working art sources and local review artifacts are not needed for deployment.
+assets/art-direction/
+assets/baked/
+assets/raw/
+assets/sources/
+design/
+*.zip

@@ -1,0 +1,805 @@
+[
+  {
+    "file": "ida-base.glb",
+    "bytes": 19936,
+    "sha256": "94f0273130a677bb40f0756ad7cebcdb2a034c5a50b6cd2ed1007e7b42931f50",
+    "triangles": 552,
+    "nodes": [
+      "Base",
+      "Structure",
+      "Glass",
+      "Metal",
+      "Light",
+      "Accent"
+    ],
+    "bounds": {
+      "min": [
+        -1.674906218768978,
+        -0.0000677411199782596,
+        -1.5
+      ],
+      "max": [
+        1.674906218768978,
+        0.7200677554250934,
+        2.1549999713897705
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_materials_emissive_strength",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "ida-city.glb",
+    "bytes": 183656,
+    "sha256": "203c4e315104428457b837407fafcfc22e6a1df921747b185819034d7abc442c",
+    "triangles": 7991,
+    "nodes": [
+      "City",
+      "Holiday",
+      "Ground",
+      "Snow",
+      "Structure"
+    ],
+    "bounds": {
+      "min": [
+        -4.800000190734863,
+        -0.21994108019149272,
+        -4.6997928397024715
+      ],
+      "max": [
+        4.800000190734863,
+        2.050055403859592,
+        4.099792458232745
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "ida-crane.glb",
+    "bytes": 36020,
+    "sha256": "29509382590370a51057a8ac91efed6de637d679b6e9a261ef9c3a08bf3a5022",
+    "triangles": 1224,
+    "nodes": [
+      "Crane",
+      "Boom",
+      "Metal",
+      "Glass",
+      "Trolley",
+      "Metal",
+      "Rail_0",
+      "Accent",
+      "Metal",
+      "Rail_1",
+      "Accent",
+      "Metal",
+      "Rail_2",
+      "Accent",
+      "Metal",
+      "Mast",
+      "Metal",
+      "Foot",
+      "Metal",
+      "Accent"
+    ],
+    "bounds": {
+      "min": [
+        -4.399968776121432,
+        -3.725290076417309e-10,
+        -2.9250000715255737
+      ],
+      "max": [
+        1,
+        5.3699384899181535,
+        0.17499999701976776
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/5/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/6/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/7/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/8/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/9/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/10/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/11/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "ida-floor-a.glb",
+    "bytes": 20908,
+    "sha256": "4aff8848afc0a86f61b9879a9d8912df87af4b9c6959de394fec3f997d62c03f",
+    "triangles": 726,
+    "nodes": [
+      "Floor_a",
+      "Structure",
+      "Glass",
+      "Snow",
+      "WindowLights",
+      "Window_0",
+      "Window_1",
+      "Window_2",
+      "Window_3",
+      "Window_4",
+      "Window_5"
+    ],
+    "bounds": {
+      "min": [
+        -1.5,
+        -0.41005899561667725,
+        -1.3249458296456802
+      ],
+      "max": [
+        1.5,
+        0.41003347200717527,
+        1.3249458296456802
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_materials_emissive_strength",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "ida-floor-b.glb",
+    "bytes": 23964,
+    "sha256": "c390f80de1fc602ea0e3948a3cd077a01169c5eceaa455e33b9bedd1b79b629a",
+    "triangles": 774,
+    "nodes": [
+      "Floor_b",
+      "Structure",
+      "Glass",
+      "Snow",
+      "Metal",
+      "WindowLights",
+      "Window_0",
+      "Window_1",
+      "Window_2",
+      "Window_3",
+      "Window_4",
+      "Window_5"
+    ],
+    "bounds": {
+      "min": [
+        -1.5,
+        -0.41005899561667725,
+        -1.3249458296456802
+      ],
+      "max": [
+        1.5,
+        0.41003347200717527,
+        1.3249458296456802
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_materials_emissive_strength",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "ida-floor-c.glb",
+    "bytes": 23180,
+    "sha256": "95a07ba737c27eed058be18d77a576797e6fc3235add66ab2fc866d2013d48a8",
+    "triangles": 738,
+    "nodes": [
+      "Floor_c",
+      "Structure",
+      "Glass",
+      "Snow",
+      "Accent",
+      "WindowLights",
+      "Window_0",
+      "Window_1",
+      "Window_2",
+      "Window_3",
+      "Window_4",
+      "Window_5"
+    ],
+    "bounds": {
+      "min": [
+        -1.5,
+        -0.41005899561667725,
+        -1.3249458296456802
+      ],
+      "max": [
+        1.5,
+        0.41003347200717527,
+        1.3249458296456802
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_materials_emissive_strength",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "ida-floor-special.glb",
+    "bytes": 23468,
+    "sha256": "0c61edf0011a131566ea47a73718d0715efca213d80c9bf44e4d5a5c25d31d95",
+    "triangles": 774,
+    "nodes": [
+      "Floor_special",
+      "Structure",
+      "Glass",
+      "Snow",
+      "Accent",
+      "WindowLights",
+      "Window_0",
+      "Window_1",
+      "Window_2",
+      "Window_3",
+      "Window_4",
+      "Window_5"
+    ],
+    "bounds": {
+      "min": [
+        -1.5,
+        -0.41005899561667725,
+        -1.3249458296456802
+      ],
+      "max": [
+        1.5,
+        0.41003347200717527,
+        1.3249458296456802
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_materials_emissive_strength",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "ida-holiday-trim.glb",
+    "bytes": 50044,
+    "sha256": "afaa6c69e56da1d9c47931510fa6d665fbd3d72eeb2217b476bf079d5003665b",
+    "triangles": 2016,
+    "nodes": [
+      "HolidayDecor",
+      "Trim",
+      "Holiday",
+      "Bulb",
+      "Wreath",
+      "Holiday"
+    ],
+    "bounds": {
+      "min": [
+        -1.434999942779541,
+        -0.19,
+        -1.2850880435156524
+      ],
+      "max": [
+        1.565000057220459,
+        0.360037829777754,
+        1.4444010730355747
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "ida-quarter-baked.glb",
+    "bytes": 1211580,
+    "sha256": "0fe8f31dcfa06d2d02daa3abf0fd8a2d6e0160c3866973083ef1780b4dde2afa",
+    "triangles": 157808,
+    "nodes": [
+      "BakedQuarter"
+    ],
+    "bounds": {
+      "min": [
+        -80,
+        -0.2787863033113873,
+        -80
+      ],
+      "max": [
+        80,
+        3.3687859492597974,
+        80
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "ida-roof.glb",
+    "bytes": 16440,
+    "sha256": "4ae7b672deff264aa034c8e1a9e72752decd69bc4dd610cce74b5c3886b374e5",
+    "triangles": 456,
+    "nodes": [
+      "Roof",
+      "Structure",
+      "Metal",
+      "Snow",
+      "Accent"
+    ],
+    "bounds": {
+      "min": [
+        -1.5,
+        -0.00003463910430172301,
+        -1.3249458296456802
+      ],
+      "max": [
+        1.5,
+        0.4375200858519014,
+        1.3324759598472031
+      ]
+    },
+    "extensions": [
+      "EXT_meshopt_compression",
+      "KHR_mesh_quantization"
+    ],
+    "validation": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/buffers/0"
+        }
+      ]
+    }
+  }
+]

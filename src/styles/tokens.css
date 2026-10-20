@@ -1,0 +1,20 @@
+@import './brand.css';
+
+:root {
+  --ida-accent: var(--ida-blue);
+  --ida-accent-hover: var(--ida-blue);
+  --ida-accent-active: var(--ida-blue);
+  --ida-bg: var(--ida-black);
+  --ida-surface: var(--ida-black);
+  --ida-surface-glass: var(--ida-black);
+  --ida-text-primary: var(--ida-white);
+  --ida-text-secondary: var(--ida-lightGray);
+  --ida-success: var(--ida-white);
+  --ida-warning: var(--ida-white);
+  --ida-border: var(--ida-gray);
+  --ida-font: 'Euclid Circular A', Arial, sans-serif;
+  --ida-safe-top: max(env(safe-area-inset-top, 0px), var(--tg-viewport-safe-area-inset-top, 0px), var(--tg-viewport-content-safe-area-inset-top, 0px));
+  --ida-safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--tg-viewport-safe-area-inset-bottom, 0px), var(--tg-viewport-content-safe-area-inset-bottom, 0px));
+  --ida-safe-left: max(env(safe-area-inset-left, 0px), var(--tg-viewport-safe-area-inset-left, 0px), var(--tg-viewport-content-safe-area-inset-left, 0px));
+  --ida-safe-right: max(env(safe-area-inset-right, 0px), var(--tg-viewport-safe-area-inset-right, 0px), var(--tg-viewport-content-safe-area-inset-right, 0px));
+}

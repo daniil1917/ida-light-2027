@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="80" viewBox="0 0 128 80">
+  <defs>
+    <linearGradient id="room" x2="0" y2="1"><stop stop-color="#a69b90"/><stop offset=".28" stop-color="#f3dfc2"/><stop offset="1" stop-color="#fff2dc"/></linearGradient>
+    <linearGradient id="curtain"><stop stop-color="#9c9186"/><stop offset="1" stop-color="#d0c5b6"/></linearGradient>
+  </defs>
+  <path fill="url(#room)" d="M3 3h122v74H3z"/>
+  <path fill="url(#curtain)" opacity=".55" d="M3 3h20l-9 74H3zm122 0h-20l9 74h11z"/>
+  <path fill="#978d82" d="M62 3h4v74h-4zM3 48h122v2H3z" opacity=".8"/>
+  <path fill="#b9aa97" opacity=".3" d="M24 66h20v11H24zm60-6h16v17H84z"/>
+</svg>

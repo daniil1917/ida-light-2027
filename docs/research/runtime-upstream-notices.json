@@ -1,0 +1,62 @@
+[
+  {
+    "package": "@react-three/fiber",
+    "repository": "pmndrs/react-three-fiber",
+    "archived": false,
+    "defaultBranch": "master",
+    "readmeSHA": "ad26449d0eca89d0a0dcbf88e04cea80218325f2",
+    "licensePath": "LICENSE",
+    "licenseSource": "https://github.com/pmndrs/react-three-fiber/blob/master/LICENSE",
+    "licenseBlobSHA": "493cfb3c8335c31bea327e0e27a8cb22004111d7",
+    "licenseSHA256": "9c35b5de7b7493a707fffe4eb23bd2f7f449153c1911f7c6eefb4e591fd5349a",
+    "usage": "Unmodified distribution notice; dependency implementation is unchanged"
+  },
+  {
+    "package": "@react-three/rapier",
+    "repository": "pmndrs/react-three-rapier",
+    "archived": false,
+    "defaultBranch": "main",
+    "readmeSHA": "9056337fd2254ce0b6dd985165af354dedf7c472",
+    "licensePath": "LICENSE",
+    "licenseSource": "https://github.com/pmndrs/react-three-rapier/blob/main/LICENSE",
+    "licenseBlobSHA": "3a080ade7c2205350aa8e6ce05302b89e01fa98e",
+    "licenseSHA256": "cd14add33d47bcecae9fed5559224ae135c5ec41e1d3a126601f5fbd82291834",
+    "usage": "Unmodified distribution notice; dependency implementation is unchanged"
+  },
+  {
+    "package": "@dimforge/rapier3d-compat",
+    "repository": "dimforge/rapier.js",
+    "archived": true,
+    "defaultBranch": "master",
+    "readmeSHA": "d566fc4b685a8ac8a200b1b4fa21b91e33ddae0f",
+    "licensePath": "LICENSE",
+    "licenseSource": "https://github.com/dimforge/rapier.js/blob/master/LICENSE",
+    "licenseBlobSHA": "e579674df63f86fde1903c3295a7125d15d83826",
+    "licenseSHA256": "4c05555705e3efde601fb1252ae48f1d63992af8a8fb8947745b7fa834e8f519",
+    "usage": "Unmodified distribution notice; dependency implementation is unchanged"
+  },
+  {
+    "package": "maath",
+    "repository": "pmndrs/maath",
+    "archived": false,
+    "defaultBranch": "main",
+    "readmeSHA": "0231ee3b2200137709f0fbc2c82b537d5e9b6fd4",
+    "licensePath": "LICENSE",
+    "licenseSource": "https://github.com/pmndrs/math/blob/main/LICENSE",
+    "licenseBlobSHA": "bf20ae590914b900be34ab35248a91b78cc318ee",
+    "licenseSHA256": "f8ed15d0893b846b869dc0290a5aee14c82319a09d3522091ad300a0e5f73291",
+    "usage": "Unmodified distribution notice; dependency implementation is unchanged"
+  },
+  {
+    "package": "react-remove-scroll-bar",
+    "repository": "theKashey/react-remove-scroll-bar",
+    "archived": false,
+    "defaultBranch": "master",
+    "readmeSHA": "11b1c805b9026bd28ca4f2b1337b8e7c5891903a",
+    "licensePath": "LICENSE",
+    "licenseSource": "https://github.com/theKashey/react-remove-scroll-bar/blob/master/LICENSE",
+    "licenseBlobSHA": "7c08c3990396ecefd90f99ff5d9a34f26f5b5616",
+    "licenseSHA256": "a79aae0c0f21990d9d963bb3c5a79cdcea9a46f8523ba55c58d7fe776b6ebc84",
+    "usage": "Unmodified distribution notice; dependency implementation is unchanged"
+  }
+]

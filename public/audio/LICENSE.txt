@@ -1,0 +1,4 @@
+Original synthesized project audio: CC0 1.0 Universal (CC0-1.0).
+To the extent possible under law, the creator has waived all copyright and related or neighboring rights to these original synthesized sound assets.
+No external samples or recordings were used. Source: scripts/generate-audio.py.
+License: https://creativecommons.org/publicdomain/zero/1.0/

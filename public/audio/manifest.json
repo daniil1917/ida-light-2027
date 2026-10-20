@@ -1,0 +1,16 @@
+{
+  "origin": "Original deterministic synthesis: scripts/generate-audio.py",
+  "license": "CC0-1.0",
+  "externalSamples": false,
+  "sampleRate": 48000,
+  "backgroundAudio": false,
+  "effects": [
+    "impact"
+  ],
+  "files": {
+    "impact.wav": {
+      "bytes": 34604,
+      "sha256": "9d75860c3fbb10dfb43c3b4c392822408d845456493ace52ae8dc47bc62bfdf9"
+    }
+  }
+}

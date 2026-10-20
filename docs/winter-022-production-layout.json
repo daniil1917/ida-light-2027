@@ -1,0 +1,65 @@
+[
+  {
+    "gutter": "36px",
+    "items": [
+      {
+        "left": 36,
+        "right": 36,
+        "selector": ".brand-header"
+      },
+      {
+        "left": 36,
+        "right": 36,
+        "selector": ".intro-copy"
+      },
+      {
+        "left": 36,
+        "right": 36,
+        "selector": ".intro-action"
+      }
+    ],
+    "width": 600
+  },
+  {
+    "gutter": "20px",
+    "items": [
+      {
+        "left": 20,
+        "right": 20,
+        "selector": ".brand-header"
+      },
+      {
+        "left": 20,
+        "right": 20,
+        "selector": ".intro-copy"
+      },
+      {
+        "left": 20,
+        "right": 20,
+        "selector": ".intro-action"
+      }
+    ],
+    "width": 390
+  },
+  {
+    "gutter": "16px",
+    "items": [
+      {
+        "left": 16,
+        "right": 16,
+        "selector": ".brand-header"
+      },
+      {
+        "left": 16,
+        "right": 16,
+        "selector": ".intro-copy"
+      },
+      {
+        "left": 16,
+        "right": 16,
+        "selector": ".intro-action"
+      }
+    ],
+    "width": 320
+  }
+]

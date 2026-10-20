@@ -1,0 +1,102 @@
+[
+  {
+    "frame": 0,
+    "state": "celebration",
+    "time": "2026-10-16T19:38:55.901Z"
+  },
+  {
+    "frame": 1,
+    "state": "celebration",
+    "time": "2026-10-16T19:38:56.123Z"
+  },
+  {
+    "frame": 2,
+    "state": "celebration",
+    "time": "2026-10-16T19:38:56.376Z"
+  },
+  {
+    "frame": 3,
+    "state": "celebration",
+    "time": "2026-10-16T19:38:56.698Z"
+  },
+  {
+    "frame": 4,
+    "state": "greeting",
+    "time": "2026-10-16T19:38:57.313Z"
+  },
+  {
+    "frame": 5,
+    "state": "greeting",
+    "time": "2026-10-16T19:38:57.854Z"
+  },
+  {
+    "frame": 6,
+    "state": "greeting",
+    "time": "2026-10-16T19:38:58.140Z"
+  },
+  {
+    "frame": 7,
+    "state": "greeting",
+    "time": "2026-10-16T19:38:58.349Z"
+  },
+  {
+    "frame": 8,
+    "state": "greeting",
+    "time": "2026-10-16T19:38:58.647Z"
+  },
+  {
+    "frame": 9,
+    "state": "greeting",
+    "time": "2026-10-16T19:38:58.872Z"
+  },
+  {
+    "frame": 10,
+    "state": "greeting",
+    "time": "2026-10-16T19:38:59.260Z"
+  },
+  {
+    "frame": 11,
+    "state": "greeting",
+    "time": "2026-10-16T19:38:59.484Z"
+  },
+  {
+    "frame": 12,
+    "state": "greeting",
+    "time": "2026-10-16T19:38:59.769Z"
+  },
+  {
+    "frame": 13,
+    "state": "greeting",
+    "time": "2026-10-16T19:39:00.078Z"
+  },
+  {
+    "frame": 14,
+    "state": "greeting",
+    "time": "2026-10-16T19:39:00.351Z"
+  },
+  {
+    "frame": 15,
+    "state": "greeting",
+    "time": "2026-10-16T19:39:00.585Z"
+  },
+  {
+    "frame": 16,
+    "state": "greeting",
+    "time": "2026-10-16T19:39:00.789Z"
+  },
+  {
+    "frame": 17,
+    "state": "greeting",
+    "time": "2026-10-16T19:39:01.094Z"
+  },
+  {
+    "frame": 18,
+    "state": "greeting",
+    "time": "2026-10-16T19:39:01.299Z"
+  },
+  {
+    "frame": 19,
+    "state": "greeting",
+    "time": "2026-10-16T19:39:01.600Z"
+  }
+]

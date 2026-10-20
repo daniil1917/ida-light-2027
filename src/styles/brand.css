@@ -1,0 +1,5 @@
+@font-face { font-family: 'Euclid Circular A'; font-style: normal; font-weight: 300; font-display: swap; src: url('/fonts/euclid-circular-a-light.woff2') format('woff2'); }
+@font-face { font-family: 'Euclid Circular A'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/euclid-circular-a-regular.woff2') format('woff2'); }
+@font-face { font-family: 'Euclid Circular A'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/euclid-circular-a-medium.woff2') format('woff2'); }
+@font-face { font-family: 'Euclid Circular A'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/euclid-circular-a-semibold.woff2') format('woff2'); }
+:root { --ida-blue: #245bf3; --ida-black: #1a1b1d; --ida-white: #ffffff; --ida-gray: #656d80; --ida-lightGray: #efefef; }

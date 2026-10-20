@@ -1,0 +1,19 @@
+{
+  "region": [
+    185,
+    160,
+    410,
+    510
+  ],
+  "meanRgbDifference": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "maxRgbDifference": [
+    0,
+    0,
+    0
+  ],
+  "pixelIdentical": true
+}

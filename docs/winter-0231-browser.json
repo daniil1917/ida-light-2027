@@ -1,0 +1,22 @@
+{
+  "wins": [
+    {
+      "height": 1494,
+      "loaded": true,
+      "src": "/postcards/paper-tree.png",
+      "width": 1052
+    },
+    {
+      "height": 1494,
+      "loaded": true,
+      "src": "/postcards/reindeer.png",
+      "width": 1052
+    }
+  ],
+  "errors": [],
+  "production": {
+    "url": "http://127.0.0.1:4183/?v=0.23.1&quality=high",
+    "started": true,
+    "errors": []
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "intro": {
+    "gutter": "32px",
+    "height": 723,
+    "items": [
+      {
+        "bottom": 647,
+        "left": 32,
+        "right": 32,
+        "selector": ".brand-header"
+      },
+      {
+        "bottom": 504.6015625,
+        "left": 32,
+        "right": 32,
+        "selector": ".intro-copy"
+      },
+      {
+        "bottom": 32,
+        "left": 32,
+        "right": 32,
+        "selector": ".intro-action"
+      }
+    ],
+    "width": 600
+  },
+  "secondCard": {
+    "hidden": false,
+    "image": "/postcards/paper-tree.png",
+    "transform": "rotateX(8.0328deg) rotateY(-7.9464deg) scale(1.025)"
+  },
+  "keyboard": {
+    "focused": true,
+    "transform": "rotateX(2.2778deg) rotateY(-2.1996deg) scale(1.00493)"
+  },
+  "responsive": [
+    {
+      "gutter": "20px",
+      "height": 844,
+      "items": [
+        {
+          "bottom": 780,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 44,
+          "left": 20,
+          "right": 20,
+          "selector": ".brand-header",
+          "top": 20,
+          "width": 350
+        },
+        {
+          "bottom": 218.515625,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 462.96875,
+          "left": 32,
+          "right": 32.0078125,
+          "selector": ".holo-scene",
+          "top": 162.515625,
+          "width": 325.9921875
+        },
+        {
+          "bottom": 20,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 108,
+          "left": 20,
+          "right": 20,
+          "selector": ".postcard-controls",
+          "top": 716,
+          "width": 350
+        },
+        {
+          "bottom": 20,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 48,
+          "left": 20,
+          "right": 20,
+          "selector": ".postcard-replay",
+          "top": 776,
+          "width": 350
+        }
+      ],
+      "width": 390
+    },
+    {
+      "gutter": "16px",
+      "height": 568,
+      "items": [
+        {
+          "bottom": 508,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 44,
+          "left": 16,
+          "right": 16,
+          "selector": ".brand-header",
+          "top": 16,
+          "width": 288
+        },
+        {
+          "bottom": 148,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 328,
+          "left": 44.515625,
+          "right": 44.5234375,
+          "selector": ".holo-scene",
+          "top": 92,
+          "width": 230.9609375
+        },
+        {
+          "bottom": 16,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 108,
+          "left": 16,
+          "right": 16,
+          "selector": ".postcard-controls",
+          "top": 444,
+          "width": 288
+        },
+        {
+          "bottom": 16,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 48,
+          "left": 16,
+          "right": 16,
+          "selector": ".postcard-replay",
+          "top": 504,
+          "width": 288
+        }
+      ],
+      "width": 320
+    },
+    {
+      "gutter": "32px",
+      "height": 390,
+      "items": [
+        {
+          "bottom": 314,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 44,
+          "left": 32,
+          "right": 32,
+          "selector": ".brand-header",
+          "top": 32,
+          "width": 536
+        },
+        {
+          "bottom": 40,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 250,
+          "left": 75.265625,
+          "right": 348.703125,
+          "selector": ".holo-scene",
+          "top": 100,
+          "width": 176.03125
+        },
+        {
+          "bottom": 111,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 108,
+          "left": 318.5625,
+          "right": 32.0078125,
+          "selector": ".postcard-controls",
+          "top": 171,
+          "width": 249.4296875
+        },
+        {
+          "bottom": 111,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 48,
+          "left": 318.5625,
+          "right": 32.0078125,
+          "selector": ".postcard-replay",
+          "top": 231,
+          "width": 249.4296875
+        }
+      ],
+      "width": 600
+    },
+    {
+      "gutter": "32px",
+      "height": 820,
+      "items": [
+        {
+          "bottom": 744,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 44,
+          "left": 32,
+          "right": 32,
+          "selector": ".brand-header",
+          "top": 32,
+          "width": 536
+        },
+        {
+          "bottom": 168,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 540,
+          "left": 109.8828125,
+          "right": 109.8828125,
+          "selector": ".holo-scene",
+          "top": 112,
+          "width": 380.234375
+        },
+        {
+          "bottom": 32,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 108,
+          "left": 32,
+          "right": 32,
+          "selector": ".postcard-controls",
+          "top": 680,
+          "width": 536
+        },
+        {
+          "bottom": 32,
+          "fill": "rgba(0, 0, 0, 0)",
+          "height": 48,
+          "left": 32,
+          "right": 32,
+          "selector": ".postcard-replay",
+          "top": 740,
+          "width": 536
+        }
+      ],
+      "width": 600
+    }
+  ],
+  "production": {
+    "debug": false,
+    "gutter": "32px",
+    "hudBottom": 32,
+    "hudLeft": 32,
+    "hudRight": 32,
+    "state": "playing"
+  },
+  "foilPath": [
+    {
+      "hidden": false,
+      "hit": "holo-hit-area",
+      "transform": "rotateX(0.0283deg) rotateY(0.1139deg) scale(1.025)"
+    },
+    {
+      "hidden": false,
+      "hit": "holo-hit-area",
+      "transform": "rotateX(8.2335deg) rotateY(-8.2269deg) scale(1.025)"
+    },
+    {
+      "hidden": false,
+      "hit": "holo-hit-area",
+      "transform": "rotateX(8.147deg) rotateY(7.9461deg) scale(1.025)"
+    },
+    {
+      "hidden": false,
+      "hit": "holo-hit-area",
+      "transform": "rotateX(-8.0138deg) rotateY(8.2555deg) scale(1.025)"
+    },
+    {
+      "hidden": false,
+      "hit": "holo-hit-area",
+      "transform": "rotateX(-8.4194deg) rotateY(-8.3112deg) scale(1.025)"
+    },
+    {
+      "hidden": false,
+      "hit": "holo-hit-area",
+      "transform": "rotateX(7.625deg) rotateY(-8.2323deg) scale(1.025)"
+    }
+  ]
+}

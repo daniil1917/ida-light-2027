@@ -1,0 +1,146 @@
+[
+  {
+    "buttons": [
+      {
+        "bottom": 466,
+        "label": "Поделиться пожеланием ↗",
+        "top": 414
+      },
+      {
+        "bottom": 513,
+        "label": "Построить ещё раз ↻",
+        "top": 469
+      }
+    ],
+    "card": {
+      "bottom": 524,
+      "client": 351,
+      "height": 352.8359375,
+      "scroll": 351,
+      "top": 171.1640625
+    },
+    "height": 568,
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 565,
+        "label": "Поделиться пожеланием ↗",
+        "top": 513
+      },
+      {
+        "bottom": 612,
+        "label": "Построить ещё раз ↻",
+        "top": 568
+      }
+    ],
+    "card": {
+      "bottom": 623,
+      "client": 331,
+      "height": 333.3359375,
+      "scroll": 331,
+      "top": 289.6640625
+    },
+    "height": 667,
+    "scroll": 375,
+    "width": 375
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 723,
+        "label": "Поделиться пожеланием ↗",
+        "top": 671
+      },
+      {
+        "bottom": 774,
+        "label": "Построить ещё раз ↻",
+        "top": 730
+      }
+    ],
+    "card": {
+      "bottom": 792,
+      "client": 430,
+      "height": 432.265625,
+      "scroll": 430,
+      "top": 359.734375
+    },
+    "height": 844,
+    "scroll": 390,
+    "width": 390
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 731,
+        "label": "Поделиться пожеланием ↗",
+        "top": 679
+      },
+      {
+        "bottom": 782,
+        "label": "Построить ещё раз ↻",
+        "top": 738
+      }
+    ],
+    "card": {
+      "bottom": 800,
+      "client": 399,
+      "height": 401.21875,
+      "scroll": 399,
+      "top": 398.78125
+    },
+    "height": 852,
+    "scroll": 393,
+    "width": 393
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 811,
+        "label": "Поделиться пожеланием ↗",
+        "top": 759
+      },
+      {
+        "bottom": 862,
+        "label": "Построить ещё раз ↻",
+        "top": 818
+      }
+    ],
+    "card": {
+      "bottom": 880,
+      "client": 399,
+      "height": 401.21875,
+      "scroll": 399,
+      "top": 478.78125
+    },
+    "height": 932,
+    "scroll": 430,
+    "width": 430
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 599,
+        "label": "Поделиться пожеланием ↗",
+        "top": 547
+      },
+      {
+        "bottom": 650,
+        "label": "Построить ещё раз ↻",
+        "top": 606
+      }
+    ],
+    "card": {
+      "bottom": 668,
+      "client": 376,
+      "height": 377.5234375,
+      "scroll": 376,
+      "top": 290.4765625
+    },
+    "height": 720,
+    "scroll": 1280,
+    "width": 1280
+  }
+]

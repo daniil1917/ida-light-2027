@@ -1,0 +1,6 @@
+Euclid Circular A
+Copyright (c) 2018 by Swiss Typefaces. All rights reserved. |DCNT
+
+Font supplied by the user in Шрифт — копия.zip for the Ida Light game.
+Not an open-source font. Original license terms remain applicable.
+WOFF2 subset: Cyrillic, Latin, punctuation and UI symbols; local runtime only.

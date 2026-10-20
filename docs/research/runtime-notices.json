@@ -1,0 +1,335 @@
+[
+  {
+    "name": "@babel/runtime",
+    "version": "7.29.7",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+  },
+  {
+    "name": "@dimforge/rapier3d-compat",
+    "version": "0.19.2",
+    "license": "Apache-2.0",
+    "files": [
+      "runtime-dimforge-rapier3d-compat.txt"
+    ],
+    "sha256": "4c05555705e3efde601fb1252ae48f1d63992af8a8fb8947745b7fa834e8f519"
+  },
+  {
+    "name": "@radix-ui/react-compose-refs",
+    "version": "1.1.5",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+  },
+  {
+    "name": "@radix-ui/react-slot",
+    "version": "1.3.3",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+  },
+  {
+    "name": "@react-three/drei",
+    "version": "10.7.9",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "2e36b208b403882158daf95cae207087bbb830db4d434a79ebafffca177244c8"
+  },
+  {
+    "name": "@react-three/fiber",
+    "version": "9.8.1",
+    "license": "MIT",
+    "files": [
+      "runtime-react-three-fiber.txt"
+    ],
+    "sha256": "9c35b5de7b7493a707fffe4eb23bd2f7f449153c1911f7c6eefb4e591fd5349a"
+  },
+  {
+    "name": "@react-three/rapier",
+    "version": "2.2.0",
+    "license": "see notice",
+    "files": [
+      "runtime-react-three-rapier.txt"
+    ],
+    "sha256": "cd14add33d47bcecae9fed5559224ae135c5ec41e1d3a126601f5fbd82291834"
+  },
+  {
+    "name": "@tma.js/bridge",
+    "version": "2.3.3",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "c44881466bac14b6b7e30e35073940d15081efbadcf37f7e70993015cf0c0ef7"
+  },
+  {
+    "name": "@tma.js/sdk",
+    "version": "3.3.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "c44881466bac14b6b7e30e35073940d15081efbadcf37f7e70993015cf0c0ef7"
+  },
+  {
+    "name": "@tma.js/signals",
+    "version": "1.0.1",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "c44881466bac14b6b7e30e35073940d15081efbadcf37f7e70993015cf0c0ef7"
+  },
+  {
+    "name": "@tma.js/toolkit",
+    "version": "1.0.4",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "c44881466bac14b6b7e30e35073940d15081efbadcf37f7e70993015cf0c0ef7"
+  },
+  {
+    "name": "@tma.js/transformers",
+    "version": "1.2.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "c44881466bac14b6b7e30e35073940d15081efbadcf37f7e70993015cf0c0ef7"
+  },
+  {
+    "name": "better-promises",
+    "version": "1.0.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "f162aad1fd3edb73f2851eb4aeec15407c7051284659d09c86c74e6bf8b2c3ae"
+  },
+  {
+    "name": "canvas-confetti",
+    "version": "1.9.4",
+    "license": "ISC",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "fd44477c30a832a1dee9ef0b6cfb34677fbe5ef58c0cf655d27c646f11bb2f7a"
+  },
+  {
+    "name": "class-variance-authority",
+    "version": "0.7.1",
+    "license": "Apache-2.0",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "0ccbf956cffc8dcf515809433cb5242ee67c94513d46e48c261d68d0880de406"
+  },
+  {
+    "name": "clsx",
+    "version": "2.1.1",
+    "license": "MIT",
+    "files": [
+      "license"
+    ],
+    "sha256": "9a9edad7baae52622bddf3c15b2ef8a33d2c89f2d25408ad13e8a7481c6b0c97"
+  },
+  {
+    "name": "error-kid",
+    "version": "2.1.1",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "8056326e65a479e82e35563e1a5ac875eb0072f7fa1a9f818dd0c41595cfac76"
+  },
+  {
+    "name": "fp-ts",
+    "version": "2.16.11",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "8a505a21f380e0eace06a8071900fce03dc93da017b01cb42853ffb97fc67be3"
+  },
+  {
+    "name": "framer-motion",
+    "version": "12.43.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE.md"
+    ],
+    "sha256": "5ff46083b88563822b0560dd6221ab89d2f74bc97a52d4c97a75020fd62c6f32"
+  },
+  {
+    "name": "howler",
+    "version": "2.2.4",
+    "license": "MIT",
+    "files": [
+      "LICENSE.md"
+    ],
+    "sha256": "0ad5aef7beeb552832fe01db1c46933f948dfe5da35017bd0efa0006ffd2ced9"
+  },
+  {
+    "name": "its-fine",
+    "version": "2.1.1",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "643123eeb38f154d93cb8323e1289a648d3f343b411a9340453c010e325d0c82"
+  },
+  {
+    "name": "lucide-react",
+    "version": "1.52.0",
+    "license": "ISC",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+  },
+  {
+    "name": "mitt",
+    "version": "3.0.1",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "1cab22f196264195a4caec8ca5630170fdde76ee8f43346e47021d087332d3b0"
+  },
+  {
+    "name": "motion",
+    "version": "12.43.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE.md"
+    ],
+    "sha256": "1bf0dc3f7727723e5a032ed12164a47cf92c05204cb1a3485f123c24e2833ed1"
+  },
+  {
+    "name": "motion-dom",
+    "version": "12.43.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE.md"
+    ],
+    "sha256": "1bf0dc3f7727723e5a032ed12164a47cf92c05204cb1a3485f123c24e2833ed1"
+  },
+  {
+    "name": "motion-utils",
+    "version": "12.39.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE.md"
+    ],
+    "sha256": "1bf0dc3f7727723e5a032ed12164a47cf92c05204cb1a3485f123c24e2833ed1"
+  },
+  {
+    "name": "react",
+    "version": "19.3.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+  },
+  {
+    "name": "react-dom",
+    "version": "19.3.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+  },
+  {
+    "name": "react-use-measure",
+    "version": "2.1.7",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "1f9038eff8dbd6505a26f9d6830cc6da2b87ab1a9305d1100884986e9c11a31a"
+  },
+  {
+    "name": "scheduler",
+    "version": "0.28.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+  },
+  {
+    "name": "suspend-react",
+    "version": "0.1.3",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "997e79b828d8b85d6f18730c8dbf58074811360a199506bd84e1263e17c227a2"
+  },
+  {
+    "name": "tailwind-merge",
+    "version": "3.7.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE.md"
+    ],
+    "sha256": "d4c70c7ce38cea8778f0aed3fc0bef0a9dbd27f13bd8b6773cbd6d37941971e5"
+  },
+  {
+    "name": "three",
+    "version": "0.180.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+  },
+  {
+    "name": "three-stdlib",
+    "version": "2.36.1",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "28eb7edf059a39094aa3d169db1fec46ac4a6279c921a90f965828d92ec86e79"
+  },
+  {
+    "name": "use-sync-external-store",
+    "version": "1.7.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+  },
+  {
+    "name": "valibot",
+    "version": "1.5.0",
+    "license": "MIT",
+    "files": [
+      "LICENSE.md"
+    ],
+    "sha256": "1ca6c9ca372cffe26c313464b9d9f0aef2417b27b2bad20396f4769005122d4d"
+  },
+  {
+    "name": "zustand",
+    "version": "5.0.15",
+    "license": "MIT",
+    "files": [
+      "LICENSE"
+    ],
+    "sha256": "c1e6e266563517467b1bf874817d23e426f3149252bd7d42758cd697514b8417"
+  }
+]

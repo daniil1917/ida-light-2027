@@ -1,0 +1,6 @@
+{
+  "source": "https://idalite.ru/",
+  "element": "header .TheLogo",
+  "changes": "Original SVG paths retained; white fill for dark game background.",
+  "sha256": "86d2777a82318d83644855306bb1580b4804f45cb3e1441449a84ea6f83b6e96"
+}
