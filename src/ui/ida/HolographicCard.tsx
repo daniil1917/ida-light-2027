@@ -11,9 +11,10 @@ export function HolographicCard({ greeting }: { greeting: Greeting }) {
   const reduced = !!useReducedMotion()
   const paused = useGameStore(s => s.paused)
   const [failed, setFailed] = useState(false)
+  const [needsMotionPermission, setNeedsMotionPermission] = useState(false)
   useEffect(() => {
     if (!scene.current || !card.current || !canvas.current || !image.current || failed) return
-    const controller = holographicEffect(scene.current, card.current, canvas.current, image.current, reduced)
+    const controller = holographicEffect(scene.current, card.current, canvas.current, image.current, reduced, setNeedsMotionPermission)
     effect.current = controller
     controller.setPaused(useGameStore.getState().paused)
     return () => { controller.dispose(); effect.current = null }
@@ -28,6 +29,7 @@ export function HolographicCard({ greeting }: { greeting: Greeting }) {
       </div>
     </article>
     {!failed && <div className="holo-hit-area" aria-hidden="true" />}
-    <p className="sr-only" id="postcard-instructions">Наведи курсор на открытку или проведи по ней пальцем, чтобы наклонить её и увидеть голографический блик. С клавиатуры используй стрелки. Escape возвращает исходное положение.</p>
+    {!failed && needsMotionPermission && <span className="holo-motion-hint">Коснись, чтобы включить наклон</span>}
+    <p className="sr-only" id="postcard-instructions">Наклоняй телефон, чтобы поворачивать открытку и менять голографический блик. Если нужно разрешение на датчики, коснись открытки или нажми Enter. Также можно управлять пальцем или курсором. С клавиатуры используй стрелки. Escape возвращает исходное положение.</p>
   </div>
 }

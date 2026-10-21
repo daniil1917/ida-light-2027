@@ -39,11 +39,11 @@ function flush() {
     pending.forEach(callback => callback(time))
   }
 }
-function mount(reduced = false, context: WebGLRenderingContext | null = null) {
+function mount(reduced = false, context: WebGLRenderingContext | null = null, permission?: (needed: boolean) => void) {
   const scene = new Element(), card = new Element(), canvas = new Element()
   canvas.context = context
   const effect = holographicEffect(scene as unknown as HTMLElement, card as unknown as HTMLElement,
-    canvas as unknown as HTMLCanvasElement, { complete: true, naturalWidth: 1052 } as HTMLImageElement, reduced)
+    canvas as unknown as HTMLCanvasElement, { complete: true, naturalWidth: 1052 } as HTMLImageElement, reduced, permission)
   cleanup = effect.dispose
   return { scene, card, canvas, effect }
 }
@@ -156,4 +156,140 @@ it('retains the active light position when the tab is hidden and restored', () =
   expect(frames.size).toBe(0)
   Object.assign(document, { hidden: false }); document.dispatchEvent(new Event('visibilitychange')); flush()
   expect(card.style.transform).toContain('rotateY(2.159')
+})
+
+function mobile(requestPermission?: () => Promise<PermissionState>) {
+  const source = Object.assign(class {}, requestPermission ? { requestPermission } : {})
+  const device = Object.assign(new EventTarget(), {
+    isSecureContext: true, DeviceOrientationEvent: source,
+    matchMedia: () => ({ matches: true }), screen: { orientation: { angle: 0 } },
+  })
+  vi.stubGlobal('window', device)
+  return device
+}
+function orientation(beta: number | null, gamma: number | null) {
+  window.dispatchEvent(Object.assign(new Event('deviceorientation'), { beta, gamma })); flush()
+}
+function rotation(card: Element) {
+  return [...card.style.transform.matchAll(/rotate[XY]\((-?[\d.]+)deg\)/g)].map(match => Number(match[1]))
+}
+function touch(scene: Element, type: string) {
+  scene.dispatchEvent(Object.assign(new Event(type), { pointerId: 7, pointerType: 'touch', clientX: 0, clientY: 205 })); flush()
+}
+it('calibrates mobile tilt, bounds angles, ignores invalid readings and remaps landscape', () => {
+  const device = mobile(), permission = vi.fn()
+  const { card } = mount(false, null, permission)
+  expect(permission).toHaveBeenLastCalledWith(false)
+  orientation(40, 5)
+  expect(rotation(card)).toEqual([0, 0])
+  orientation(55, 35)
+  expect(rotation(card)[0]).toBeCloseTo(-4.5, 2)
+  expect(rotation(card)[1]).toBeCloseTo(9, 2)
+  const previous = card.style.transform
+  orientation(null, 0); orientation(Infinity, 0); orientation(45, NaN)
+  expect(card.style.transform).toBe(previous)
+  device.screen.orientation.angle = 90
+  orientation(40, 5)
+  expect(rotation(card)[0]).toBeCloseTo(0, 2)
+  orientation(70, 5)
+  expect(rotation(card)[1]).toBeCloseTo(9, 2)
+  orientation(170, -80)
+  expect(rotation(card).every(angle => Math.abs(angle) <= 9)).toBe(true)
+})
+it('unwraps the beta boundary without flipping the card', () => {
+  mobile(); const { card } = mount()
+  orientation(179, 0); orientation(-179, 0)
+  expect(rotation(card)[0]).toBeCloseTo(-.6, 2)
+})
+it('gives touch priority and returns to the sensor position after release, then cleans up', () => {
+  mobile(); const { card, scene, effect } = mount()
+  orientation(45, 0); orientation(45, 20)
+  expect(rotation(card)[1]).toBeCloseTo(6, 2)
+  touch(scene, 'pointerdown')
+  orientation(45, 30)
+  expect(rotation(card)[1]).toBeCloseTo(-9, 2)
+  touch(scene, 'pointerup')
+  expect(rotation(card)[1]).toBeCloseTo(9, 2)
+  effect.dispose(); cleanup = undefined
+  orientation(60, 20)
+  expect(card.style.transform).toBe('')
+  expect(frames.size).toBe(0)
+})
+it('stops hidden/paused sensor input and recalibrates on return without a jump', () => {
+  mobile(); const { card, effect } = mount()
+  orientation(45, 0); orientation(55, 0)
+  effect.setPaused(true); const paused = card.style.transform
+  orientation(100, 20)
+  expect(card.style.transform).toBe(paused)
+  effect.setPaused(false); orientation(100, 20)
+  expect(rotation(card)[0]).toBeCloseTo(0, 2)
+  orientation(115, 20)
+  expect(rotation(card)[0]).toBeCloseTo(-4.5, 2)
+  Object.assign(document, { hidden: true }); document.dispatchEvent(new Event('visibilitychange'))
+  orientation(70, 0)
+  expect(frames.size).toBe(0)
+  Object.assign(document, { hidden: false }); document.dispatchEvent(new Event('visibilitychange'))
+  orientation(70, 0)
+  expect(rotation(card)[0]).toBeCloseTo(0, 2)
+})
+it('requests iOS permission only on touch release and reuses the grant on replay', async () => {
+  const request = vi.fn().mockResolvedValue('granted'), permission = vi.fn()
+  mobile(request)
+  const { card, scene, effect } = mount(false, null, permission)
+  expect(permission).toHaveBeenLastCalledWith(true)
+  orientation(45, 0)
+  expect(request).not.toHaveBeenCalled()
+  touch(scene, 'pointerdown')
+  expect(request).not.toHaveBeenCalled()
+  touch(scene, 'pointerup')
+  expect(request).toHaveBeenCalledOnce()
+  await Promise.resolve()
+  orientation(45, 0); orientation(45, 20)
+  expect(rotation(card)[1]).toBeCloseTo(6, 2)
+  expect(permission).toHaveBeenLastCalledWith(false)
+  effect.dispose()
+  const replay = mount(false, null, permission)
+  orientation(45, 0); orientation(45, -20)
+  expect(rotation(replay.card)[1]).toBeCloseTo(-6, 2)
+  expect(request).toHaveBeenCalledOnce()
+})
+it.each(['denied', 'rejected'])('keeps touch usable when sensor permission is %s', async result => {
+  const request = result === 'denied' ? vi.fn().mockResolvedValue('denied') : vi.fn().mockRejectedValue(new Error('blocked'))
+  mobile(request); const permission = vi.fn(), { scene, card } = mount(false, null, permission)
+  touch(scene, 'pointerup'); await Promise.resolve()
+  expect(permission).toHaveBeenLastCalledWith(false)
+  orientation(0, 0); orientation(30, 30)
+  touch(scene, 'pointerdown')
+  expect(rotation(card)[1]).toBeCloseTo(-9, 2)
+  touch(scene, 'pointerup')
+  expect(rotation(card)[1]).toBeCloseTo(0, 2)
+  expect(request).toHaveBeenCalledOnce()
+})
+it.each(['Enter', 'click'])('can enable sensor permission through %s activation', async activation => {
+  const request = vi.fn().mockResolvedValue('granted'); mobile(request)
+  const { scene, card } = mount()
+  if (activation === 'Enter') expect(key(card, 'Enter').defaultPrevented).toBe(true)
+  else scene.dispatchEvent(new Event('click'))
+  await Promise.resolve()
+  expect(request).toHaveBeenCalledOnce()
+  orientation(45, 0); orientation(45, 20)
+  expect(rotation(card)[1]).toBeCloseTo(6, 2)
+})
+it('does not attach sensors or update the permission hint after a late grant on unmount', async () => {
+  let grant!: (value: PermissionState) => void
+  const device = mobile(() => new Promise(resolve => { grant = resolve })), permission = vi.fn()
+  const listen = vi.spyOn(device, 'addEventListener'), { scene, effect } = mount(false, null, permission)
+  touch(scene, 'pointerup'); effect.dispose(); cleanup = undefined; permission.mockClear()
+  grant('granted'); await Promise.resolve()
+  expect(listen).not.toHaveBeenCalled()
+  expect(permission).not.toHaveBeenCalled()
+})
+it.each(['desktop', 'insecure', 'reduced'])('skips sensors for %s', mode => {
+  const request = vi.fn().mockResolvedValue('granted'), device = mobile(request)
+  if (mode === 'desktop') device.matchMedia = () => ({ matches: false })
+  if (mode === 'insecure') device.isSecureContext = false
+  const permission = vi.fn(), { scene } = mount(mode === 'reduced', null, permission)
+  touch(scene, 'pointerup')
+  expect(request).not.toHaveBeenCalled()
+  expect(permission).toHaveBeenLastCalledWith(false)
 })

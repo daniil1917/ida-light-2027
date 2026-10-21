@@ -1,12 +1,21 @@
 import { fragmentSource, vertexSource } from './holographicShaders'
 
+type OrientationSource = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<PermissionState> }
+let grantedOrientation: OrientationSource | undefined
+
 /** Original tilt/foil interaction, with lifecycle cleanup for React and pause support. */
 export function holographicEffect(scene: HTMLElement, card: HTMLElement, canvas: HTMLCanvasElement,
-  artwork: HTMLImageElement, reducedMotion: boolean) {
+  artwork: HTMLImageElement, reducedMotion: boolean, onMotionPermission?: (needed: boolean) => void) {
   const state = { x: .5, y: .5, light: 0 }, target = { ...state }
+  const motionTarget = { ...state }
   const events = new AbortController()
   const on = { signal: events.signal }
   let frame = 0, paused = false, previousTime = 0, pointerInside = false
+  let motionAttached = false, permissionRequested = false
+  let neutral: { beta: number; gamma: number; angle: number } | undefined
+  const orientation = typeof window !== 'undefined' && window.isSecureContext &&
+    window.matchMedia('(any-pointer: coarse)').matches && !reducedMotion
+    ? window.DeviceOrientationEvent as OrientationSource | undefined : undefined
   let draw: (() => void) | undefined
   let resizeGL: (() => void) | undefined
   let disposeGL: (() => void) | undefined
@@ -32,7 +41,52 @@ export function holographicEffect(scene: HTMLElement, card: HTMLElement, canvas:
     else previousTime = 0
   }
   function wake() { if (!frame && !paused && !document.hidden) frame = requestAnimationFrame(render) }
-  function reset() { target.x = .5; target.y = .5; target.light = 0; wake() }
+  function reset() { Object.assign(target, motionTarget); wake() }
+  function calibrate() {
+    neutral = undefined
+    Object.assign(motionTarget, { x: .5, y: .5, light: 0 })
+    if (!pointerInside) reset()
+  }
+  function tilt(event: DeviceOrientationEvent) {
+    if (paused || document.hidden || event.beta === null || event.gamma === null ||
+      !Number.isFinite(event.beta) || !Number.isFinite(event.gamma)) return
+    const angle = window.screen.orientation?.angle ?? window.orientation ?? 0
+    if (!neutral || neutral.angle !== angle) {
+      calibrate()
+      neutral = { beta: event.beta, gamma: event.gamma, angle }
+    }
+    const beta = (event.beta - neutral.beta + 540) % 360 - 180
+    const gamma = (event.gamma - neutral.gamma + 540) % 360 - 180
+    const radians = angle * Math.PI / 180
+    const x = gamma * Math.cos(radians) + beta * Math.sin(radians)
+    const y = beta * Math.cos(radians) - gamma * Math.sin(radians)
+    const nextX = Math.max(0, Math.min(1, .5 + x / 60))
+    const nextY = Math.max(0, Math.min(1, .5 + y / 60))
+    const light = Math.min(1, Math.hypot(x, y) / 15)
+    // Ignore sensor noise; the existing animation loop smooths actual movement.
+    if (Math.abs(nextX - motionTarget.x) + Math.abs(nextY - motionTarget.y) + Math.abs(light - motionTarget.light) < .002) return
+    Object.assign(motionTarget, { x: nextX, y: nextY, light })
+    if (!pointerInside) reset()
+  }
+  function attachMotion() {
+    if (motionAttached || events.signal.aborted) return
+    window.addEventListener('deviceorientation', tilt, on)
+    motionAttached = true
+  }
+  async function enableMotion() {
+    if (!orientation || motionAttached || permissionRequested) return
+    permissionRequested = true
+    try {
+      if (!orientation.requestPermission || await orientation.requestPermission() === 'granted') {
+        grantedOrientation = orientation
+        attachMotion()
+      }
+    } catch { /* Touch and keyboard remain available when sensors are blocked. */ }
+    finally { if (!events.signal.aborted) onMotionPermission?.(false) }
+  }
+  const needsPermission = !!orientation?.requestPermission && grantedOrientation !== orientation
+  onMotionPermission?.(needsPermission)
+  if (orientation && !needsPermission) attachMotion()
   function aim(event: PointerEvent) {
     if (paused) return
     pointerInside = true
@@ -125,12 +179,22 @@ export function holographicEffect(scene: HTMLElement, card: HTMLElement, canvas:
     if (event.pointerType !== 'mouse') scene.setPointerCapture(event.pointerId)
     aim(event)
   }, on)
-  scene.addEventListener('pointerup', event => { if (event.pointerType !== 'mouse') { pointerInside = false; reset() } }, on)
+  scene.addEventListener('pointerup', event => {
+    if (event.pointerType !== 'mouse') {
+      pointerInside = false; reset()
+      // Request after releasing the touch so a permission sheet cannot trap a drag.
+      if (!paused) void enableMotion()
+    }
+  }, on)
   scene.addEventListener('pointercancel', () => { pointerInside = false; reset() }, on)
+  scene.addEventListener('click', () => { if (!paused) void enableMotion() }, on)
   card.addEventListener('blur', () => { if (!pointerInside) reset() }, on)
   card.addEventListener('keydown', event => {
+    if (orientation && !paused && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault(); void enableMotion(); return
+    }
     const directions: Record<string, number[]> = { ArrowLeft: [-.12, 0], ArrowRight: [.12, 0], ArrowUp: [0, -.12], ArrowDown: [0, .12] }
-    if (event.key === 'Escape') { event.preventDefault(); reset(); return }
+    if (event.key === 'Escape') { event.preventDefault(); calibrate(); reset(); return }
     if (!directions[event.key] || paused) return
     event.preventDefault()
     const [x, y] = directions[event.key]
@@ -140,13 +204,14 @@ export function holographicEffect(scene: HTMLElement, card: HTMLElement, canvas:
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       cancelAnimationFrame(frame); frame = 0; previousTime = 0
-    } else wake()
+    } else { if (motionAttached) calibrate(); wake() }
   }, on)
   return {
     setPaused(value: boolean) {
+      const resumed = paused && !value
       paused = value; previousTime = 0
       if (paused) { cancelAnimationFrame(frame); frame = 0 }
-      else wake()
+      else { if (resumed && motionAttached) calibrate(); wake() }
     },
     dispose() {
       events.abort(); observer.disconnect(); cancelAnimationFrame(frame)
