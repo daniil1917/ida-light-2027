@@ -113,9 +113,9 @@ export function GameScene() {
   return <>
     <AdaptiveQuality /><CelebrationController /><GameCamera /><Lighting /><Snow />
     <PostcardTransition><WinterAssets><Crane /><City /><WinterShadows /><WinterGlows />
-    <FloorInstances moving={fallingTower => <Physics key={collapsing ? 'collapse' : 'building'} gravity={[0, import.meta.env.DEV ? gravity : GAME_CONFIG.gravity, 0]} timeStep={1 / 60} updatePriority={-10}
+    <FloorInstances moving={(fallingTower, activeFloor) => <Physics key={collapsing ? 'collapse' : 'building'} gravity={[0, import.meta.env.DEV ? gravity : GAME_CONFIG.gravity, 0]} timeStep={1 / 60} updatePriority={-10}
       paused={paused || !['falling', 'fail', 'collapse'].includes(phase)} debug={import.meta.env.DEV && debug}>
-      <TowerSupport /><ActiveFloor />{fallingTower}<SceneReady />
+      <TowerSupport /><ActiveFloor object={activeFloor} />{fallingTower}<SceneReady />
     </Physics>} />
     <Roof active={complete} /><Preload all />
     </WinterAssets></PostcardTransition>

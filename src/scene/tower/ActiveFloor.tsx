@@ -1,15 +1,13 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type RefObject } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { CuboidCollider, RigidBody, useAfterPhysicsStep, type RapierCollider, type RapierRigidBody } from '@react-three/rapier'
 import { Group } from 'three'
 import { GAME_CONFIG as G } from '../../game/gameConfig'
 import { useGameStore } from '../../game/store'
 import { swingPosition } from '../../game/swing'
-import { Floor } from './Floor'
 import { useMotionDiagnostics } from './motionDiagnostics'
 
-export function ActiveFloor() {
-  const object = useRef<Group>(null)
+export function ActiveFloor({ object }: { object: RefObject<Group | null> }) {
   const physicsObject = useRef<Group>(null)
   const carrier = useRef<Group>(null)
   const body = useRef<RapierRigidBody>(null)
@@ -54,8 +52,14 @@ export function ActiveFloor() {
   }, -10)
   useFrame(() => {
     if (falling && object.current && carrier.current) {
-      object.current.position.copy(carrier.current.position)
-      object.current.quaternion.copy(carrier.current.quaternion)
+      const landed = useGameStore.getState().floors.at(-1)
+      if (resolved.current && landed?.id === attemptId) {
+        object.current.position.set(landed.x, landed.y, 0)
+        object.current.quaternion.identity()
+      } else {
+        object.current.position.copy(carrier.current.position)
+        object.current.quaternion.copy(carrier.current.quaternion)
+      }
     }
   }, -9)
   const resolve = () => {
@@ -77,12 +81,12 @@ export function ActiveFloor() {
     if (body.current.translation().y <= landingY + .025) resolve()
     else if (aliveFor.current > G.floorTimeoutSeconds) useGameStore.getState().reportError('Не удалось завершить падение этажа. Открой игру снова.')
   })
-  // Keep the visible model through all phases. A new attempt gets a fresh body
-  // handle, so Rapier cannot interpolate from the previous attempt's pose.
+  // The empty carrier drives a persistent tower instance, including at contact.
+  // A fresh body handle prevents interpolation from the previous attempt's pose.
   return <><RigidBody key={attemptId} ref={body} name="falling-floor" type="dynamic" position={[0, 0, 0]} colliders={false}
     ccd enabledRotations={[false, false, false]} enabledTranslations={[true, true, false]}
     onCollisionEnter={({ other }) => { if (phase === 'falling' && other.rigidBodyObject?.name === 'tower-support') resolve() }}>
     <CuboidCollider ref={collider} args={[G.floorWidth / 2, G.floorHeight / 2, G.floorDepth / 2]} friction={.3} restitution={0} />
     <group ref={physicsObject} />
-  </RigidBody><group ref={object} name="ActiveFloor" visible={visible}><Floor floorNumber={count + 1} /></group></>
+  </RigidBody><group ref={object} name="ActiveFloor" visible={visible} /></>
 }
