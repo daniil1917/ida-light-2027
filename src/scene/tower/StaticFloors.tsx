@@ -5,8 +5,8 @@ import { GAME_CONFIG as G } from '../../game/gameConfig'
 import { useWinterAssets, type WinterPart } from '../WinterAssets'
 import { towerBuffers } from './towerBuffers'
 
-function PartInstances({ part, floors, snow, wreath, firstFloor }: {
-  part: WinterPart; floors: PlacedFloor[]; snow: boolean; wreath: boolean; firstFloor: number
+function PartInstances({ part, buffers, snow, wreath }: {
+  part: WinterPart; buffers: ReturnType<typeof towerBuffers>; snow: boolean; wreath: boolean
 }) {
   const ref = useRef<InstancedMesh>(null)
   const geometry = useMemo(() => {
@@ -33,22 +33,20 @@ function PartInstances({ part, floors, snow, wreath, firstFloor }: {
   useLayoutEffect(() => {
     const mesh = ref.current!
     const cover = geometry.getAttribute('snowCover') as InstancedBufferAttribute | undefined
-    let index = 0
-    towerBuffers(floors, firstFloor).forEach(buffer => {
-      if (wreath && !buffer.wreath) return
+    buffers.forEach((buffer, index) => {
       mesh.setMatrixAt(index, buffer.matrix)
       cover?.setXY(index, ...buffer.snowCover)
-      index++
     })
-    mesh.count = index
     mesh.instanceMatrix.needsUpdate = true
     if (cover) cover.needsUpdate = true
-  }, [floors, geometry, wreath, firstFloor])
+  }, [buffers, geometry])
   return <instancedMesh ref={ref} name={`Static_${snow ? 'Snow' : wreath ? 'Wreath' : 'Body'}`}
-    args={[geometry, material, G.targetFloors + 1]} count={0} frustumCulled={false} dispose={null} />
+    args={[geometry, material, G.targetFloors + 1]} count={buffers.length} frustumCulled={false} dispose={null} />
 }
 export function StaticFloors({ floors, firstFloor = 1 }: { floors: PlacedFloor[]; firstFloor?: number }) {
   const models = useWinterAssets()
+  const buffers = useMemo(() => towerBuffers(floors, firstFloor), [floors, firstFloor])
+  const wreaths = useMemo(() => buffers.filter(buffer => buffer.wreath), [buffers])
   return <group name="StaticTower">{['FloorBody', 'SnowCap', 'Wreath'].flatMap(name => models[name].map((part, i) =>
-    <PartInstances key={`${name}_${i}`} part={part} floors={floors} firstFloor={firstFloor} snow={name === 'SnowCap'} wreath={name === 'Wreath'} />))}</group>
+    <PartInstances key={`${name}_${i}`} part={part} buffers={name === 'Wreath' ? wreaths : buffers} snow={name === 'SnowCap'} wreath={name === 'Wreath'} />))}</group>
 }

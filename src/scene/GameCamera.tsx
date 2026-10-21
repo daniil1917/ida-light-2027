@@ -65,7 +65,7 @@ export function GameCamera() {
     zoomInitialized.current = true
     camera.current.updateProjectionMatrix()
     const age = game.feedback ? (performance.now() - game.feedback.createdAt) / 1000 : 1
-    const intensity = game.feedback?.result === 'fail' ? V.failImpulse : game.feedback?.result === 'success' ? V.successImpulse : 0
+    const intensity = game.feedback?.result === 'fail' ? V.failImpulse : 0
     const shake = !reducedMotion && age < V.impactDuration ? Math.sin(age * 62) * intensity * (1 - age / V.impactDuration) : 0
     camera.current.position.set(target.current.x + V.cameraDistance[0] + shake, target.current.y + V.cameraDistance[1], V.cameraDistance[2])
     camera.current.lookAt(target.current)

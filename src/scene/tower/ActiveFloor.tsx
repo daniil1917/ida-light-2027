@@ -79,10 +79,10 @@ export function ActiveFloor() {
   })
   // Keep the visible model through all phases. A new attempt gets a fresh body
   // handle, so Rapier cannot interpolate from the previous attempt's pose.
-  return <><RigidBody key={attemptId} ref={body} type="dynamic" position={[0, 0, 0]} colliders={false}
+  return <><RigidBody key={attemptId} ref={body} name="falling-floor" type="dynamic" position={[0, 0, 0]} colliders={false}
     ccd enabledRotations={[false, false, false]} enabledTranslations={[true, true, false]}
     onCollisionEnter={({ other }) => { if (phase === 'falling' && other.rigidBodyObject?.name === 'tower-support') resolve() }}>
     <CuboidCollider ref={collider} args={[G.floorWidth / 2, G.floorHeight / 2, G.floorDepth / 2]} friction={.3} restitution={0} />
     <group ref={physicsObject} />
-  </RigidBody><group ref={object} visible={visible}><Floor floorNumber={count + 1} /></group></>
+  </RigidBody><group ref={object} name="ActiveFloor" visible={visible}><Floor floorNumber={count + 1} /></group></>
 }

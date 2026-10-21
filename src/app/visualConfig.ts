@@ -5,6 +5,5 @@ export const VISUAL_CONFIG = {
   cameraDistance: [13, 12.08, 15.1] as [number, number, number],
   cameraDamping: 3.2,
   impactDuration: 0.28,
-  successImpulse: 0.025,
   failImpulse: 0.055,
 } as const

@@ -4,7 +4,6 @@ import { Elevated } from './fluid/elevated'
 import { Badge } from './fluid/badge'
 import { FloorCounter } from './ida/FloorCounter'
 import { FeedbackBadge } from './ida/FeedbackBadge'
-import { TutorialHint } from './ida/TutorialHint'
 import { useGameStore } from '../game/store'
 import { GAME_CONFIG } from '../game/gameConfig'
 import { TowerBalance } from './ida/TowerBalance'
@@ -24,7 +23,7 @@ export function GameHUD() {
         <span aria-hidden="true">{Array.from({ length: GAME_CONFIG.maxLives }, (_, i) => <Heart key={i} className={i < lives ? 'life-full' : 'life-empty'} />)}</span>
       </Badge>
     </Elevated>
-    <FeedbackBadge />{!paused && <TutorialHint />}
+    <FeedbackBadge />
     {paused && <Elevated offset={1} className="pause-label rounded-xl" role="status">Строительство на паузе</Elevated>}
     {!paused && lives === 0 && <Elevated offset={1} className="restart-label rounded-xl" role="alert"><strong>Жизни закончились</strong><span>Начинаем новый раунд…</span></Elevated>}
   </motion.div>

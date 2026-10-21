@@ -115,8 +115,6 @@ body { background: var(--ida-black); }
 .game-metrics .lives { color: var(--ida-black); }
 .game-metrics .lives svg { width: 14px; height: 14px; stroke: var(--ida-black); }
 .feedback-container { position: absolute; bottom: calc(84px + var(--ida-safe-bottom)); width: 100%; display: flex; justify-content: center; color: var(--ida-black); }
-.tutorial-hint { position: absolute; bottom: calc(84px + var(--ida-safe-bottom)); width: 100%; display: grid; justify-items: center; gap: 6px; font-size: 13px; text-align: center; }
-.tutorial-hint small { font-size: 12px; color: var(--ida-black); }
 .eyebrow, .intro-copy p { color: var(--ida-black); }
 .pause-label, .restart-label { inset: auto 20px calc(84px + var(--ida-safe-bottom)); padding: 14px; font-size: 14px; }
 .restart-label strong { font-size: 18px; }.restart-label span { font-size: 13px; }
@@ -135,13 +133,8 @@ body { background: var(--ida-black); }
 .intro h1 { margin: 0 0 12px; }
 .intro-copy p, .intro .title-dot { color: var(--ida-white); }
 .intro-copy p { text-wrap: initial; font-size: 16px; line-height: 1.5; }
-/* Keep the requested white lettering legible over the lightest part of the sky,
-   without adding a panel across the scene. The stroke paints behind the fill. */
-.intro h1, .intro-copy p { -webkit-text-stroke: 1px rgb(26 27 29 / 50%); paint-order: stroke fill; }
-.intro-copy { text-shadow: 0 1px 6px rgb(26 27 29 / 30%); }
 .intro h1 { display: flex; align-items: baseline; gap: .2em; font-size: clamp(32px, 9vw, 48px); }
 .intro h1 > span { font-size: 1em; }
-.tutorial-hint small { max-width: 300px; line-height: 1.45; }
 @media (max-height: 680px) {
   .intro-copy { top: calc(80px + var(--ida-safe-top)); }
   .intro h1 { margin: 0 0 12px; font-size: clamp(32px, 9vw, 44px); }
@@ -156,7 +149,7 @@ body { background: var(--ida-black); }
 .brand-header { top: calc(var(--ida-gutter) + var(--ida-safe-top)); inset-inline: calc(var(--ida-gutter) + var(--ida-safe-left)) calc(var(--ida-gutter) + var(--ida-safe-right)); }
 .intro-copy { top: calc(var(--ida-gutter) + 76px + var(--ida-safe-top)); inset-inline: calc(var(--ida-gutter) + var(--ida-safe-left)) calc(var(--ida-gutter) + var(--ida-safe-right)); }
 .intro-action, .game-metrics { bottom: calc(var(--ida-gutter) + var(--ida-safe-bottom)); inset-inline: calc(var(--ida-gutter) + var(--ida-safe-left)) calc(var(--ida-gutter) + var(--ida-safe-right)); }
-.feedback-container, .tutorial-hint { width: auto; inset-inline: calc(var(--ida-gutter) + var(--ida-safe-left)) calc(var(--ida-gutter) + var(--ida-safe-right)); bottom: calc(var(--ida-gutter) + 60px + var(--ida-safe-bottom)); }
+.feedback-container { width: auto; inset-inline: calc(var(--ida-gutter) + var(--ida-safe-left)) calc(var(--ida-gutter) + var(--ida-safe-right)); bottom: calc(var(--ida-gutter) + 60px + var(--ida-safe-bottom)); }
 .pause-label, .restart-label { inset: auto calc(var(--ida-gutter) + var(--ida-safe-right)) calc(var(--ida-gutter) + 60px + var(--ida-safe-bottom)) calc(var(--ida-gutter) + var(--ida-safe-left)); }
 .message-screen { padding: calc(var(--ida-gutter) + var(--ida-safe-top)) calc(var(--ida-gutter) + var(--ida-safe-right)) calc(var(--ida-gutter) + var(--ida-safe-bottom)) calc(var(--ida-gutter) + var(--ida-safe-left)); }
 .loading-screen { padding: var(--ida-gutter); }

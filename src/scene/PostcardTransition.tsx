@@ -1,4 +1,4 @@
-import { useRef, type ReactNode } from 'react'
+import { useLayoutEffect, useRef, type ReactNode } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useReducedMotion } from 'motion/react'
 import type { Group } from 'three'
@@ -11,6 +11,17 @@ export function PostcardTransition({ children }: { children: ReactNode }) {
   const group = useRef<Group>(null)
   const progress = useRef(0)
   const reduced = !!useReducedMotion()
+  const greeting = useGameStore(s => s.state === 'greeting')
+  useLayoutEffect(() => {
+    if (greeting || !group.current) return
+    // Rapier captures its parent's world transform in passive mount effects.
+    // Restore it before replay mounts bodies under the postcard's .16 scale.
+    progress.current = 0
+    group.current.scale.setScalar(1)
+    group.current.position.set(0, 0, 0)
+    group.current.visible = true
+    group.current.updateWorldMatrix(true, true)
+  }, [greeting])
   useFrame((_, delta) => {
     if (!group.current) return
     const game = useGameStore.getState()
