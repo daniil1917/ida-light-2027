@@ -6,7 +6,6 @@ import { GAME_CONFIG as G } from '../game/gameConfig'
 import { CRANE_BOOM_HEIGHT } from './craneLayout'
 import type { PlacedFloor } from '../game/types'
 import { getDifficulty } from '../game/difficulty'
-import { layoutGutter } from '../app/layout'
 
 function camera(frame: ReturnType<typeof cameraFraming>, w: number, h: number) {
   const camera = new OrthographicCamera(-w / 2, w / 2, h / 2, -h / 2, .1, 120)
@@ -19,18 +18,19 @@ function camera(frame: ReturnType<typeof cameraFraming>, w: number, h: number) {
 function inside(point: number[], camera: OrthographicCamera, frame: ReturnType<typeof cameraFraming>, w: number, h: number) {
   const p = new Vector3(...point).project(camera)
   const x = (p.x + 1) * w / 2, y = (1 - p.y) * h / 2
-  expect(x).toBeGreaterThanOrEqual(layoutGutter(w) - .1); expect(x).toBeLessThanOrEqual(w - layoutGutter(w) + .1)
+  expect(x).toBeGreaterThanOrEqual(frame.left - .1); expect(x).toBeLessThanOrEqual(frame.right + .1)
   expect(y).toBeGreaterThanOrEqual(frame.top - .01); expect(y).toBeLessThanOrEqual(frame.bottom + .01)
 }
 
 test('the entire site and crane fit the intro at narrow, short and desktop sizes', () => {
-  for (const [w, h] of [[320, 568], [390, 844], [600, 820], [600, 723]]) {
+  for (const [w, h] of [[320, 568], [390, 844], [430, 932], [600, 820], [600, 723], [600, 390]]) {
     const frame = cameraFraming('intro', [], null, w, h), cam = camera(frame, w, h)
     for (const x of [-5.52, 4.08]) for (const y of [-.81, 2.222]) for (const z of [-3.72, 4.844]) inside([x, y, z], cam, frame, w, h)
     inside([G.craneMastX, CRANE_BOOM_HEIGHT + .65, G.craneMastZ - 2.05], cam, frame, w, h)
     const left = new Vector3(-5.52, 0, 4.844).project(cam).x
     const right = new Vector3(4.08, 0, -3.72).project(cam).x
-    expect(Math.abs(left + right)).toBeLessThan(.05)
+    const regionCentre = (frame.left + frame.right) / w - 1
+    expect(Math.abs((left + right) / 2 - regionCentre)).toBeLessThan(.025)
   }
 })
 

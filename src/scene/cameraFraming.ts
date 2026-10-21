@@ -47,10 +47,12 @@ export function cameraFraming(state: GameState, floors: PlacedFloor[], collapse:
   const ys = points.map(p => p[0] * up[0] + p[1] * up[1] + p[2] * up[2])
   const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys)
   const margin = layoutGutter(width)
-  const top = intro ? (height <= 480 ? 170 : height <= 680 ? 200 : 220) + margin - 20 : margin + 60
+  const landscapeIntro = intro && width >= 480 && height <= 480
+  const left = landscapeIntro ? width * .46 : margin, rightEdge = width - margin
+  const top = landscapeIntro ? margin + 60 : intro ? (height <= 480 ? 170 : height <= 680 ? 200 : 220) + margin - 20 : margin + 60
   const bottom = state === 'greeting' ? height - greetingHeight - margin - 14 : height - margin - (intro ? 72 : 60)
-  const zoom = Math.min((width - margin * 2) / (maxX - minX), Math.max(60, bottom - top) / (maxY - minY)) * zoomFactor
-  const targetX = (minX + maxX) / 2 / right[0]
+  const zoom = Math.min((rightEdge - left) / (maxX - minX), Math.max(60, bottom - top) / (maxY - minY)) * zoomFactor
+  const targetX = ((minX + maxX) / 2 + (width / 2 - (left + rightEdge) / 2) / zoom) / right[0]
   const targetY = ((minY + maxY) / 2 + ((top + bottom) / 2 - height / 2) / zoom - targetX * up[0]) / up[1]
-  return { zoom, targetX, targetY, minX, maxX, minY, maxY, top, bottom }
+  return { zoom, targetX, targetY, minX, maxX, minY, maxY, top, bottom, left, right: rightEdge }
 }

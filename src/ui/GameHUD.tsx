@@ -16,6 +16,7 @@ export function GameHUD() {
   const mistakes = useGameStore(s => s.mistakes)
   const lives = Math.max(0, GAME_CONFIG.maxLives - mistakes)
   return <motion.div className="game-hud" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduced ? 0 : .15, ease: 'easeOut' }}>
+    <h1 className="sr-only">Строительство дома</h1>
     <Elevated offset={1} className="game-metrics rounded-xl">
       <FloorCounter /><TowerBalance />
       <Badge className="lives" role="status" aria-live="polite" aria-label={`Осталось жизней: ${lives} из ${GAME_CONFIG.maxLives}`}>

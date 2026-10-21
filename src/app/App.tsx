@@ -1,4 +1,4 @@
-import { Component, lazy, Suspense, useEffect, type ReactNode } from 'react'
+import { Component, lazy, Suspense, useEffect, useRef, type ReactNode } from 'react'
 import { AnimatePresence, MotionConfig } from 'motion/react'
 import { TelegramProvider } from '../telegram/TelegramProvider'
 import { useGameStore } from '../game/store'
@@ -69,11 +69,13 @@ export default function App() {
   const sessionId = useGameStore(s => s.sessionId)
   const cinematic = useCelebrationStore()
   const playing = state === 'playing' || state === 'tutorial'
+  const sceneArea = useRef<HTMLDivElement>(null)
+  useEffect(() => { if (playing) sceneArea.current?.focus({ preventScroll: true }) }, [playing])
   const drop = () => { audioManager.userGesture(); useGameStore.getState().release(swingPosition()) }
   return <MotionConfig reducedMotion="user"><TelegramProvider /><GameLifecycle /><AudioProvider />
     <main className="game-shell" aria-label="Построй 2027" data-state={state}>
       <div className="winter-backdrop" aria-hidden="true" />
-      <div className="scene-area" role={playing ? 'button' : undefined} tabIndex={playing ? 0 : -1}
+      <div ref={sceneArea} className="scene-area" role={playing ? 'button' : undefined} tabIndex={playing ? 0 : -1}
         aria-label={playing ? 'Установить этаж' : 'Архитектурная 3D-сцена'}
         onPointerDown={playing ? event => { if (event.button === 0) drop() } : undefined}
         onClick={playing ? event => { if (event.detail === 0) drop() } : undefined}

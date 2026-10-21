@@ -5,14 +5,11 @@ import { DoubleSide, Matrix4, Mesh, MeshPhysicalMaterial, type BufferGeometry, t
 import { bakeGeometry } from '../assets/bakeGeometry'
 import { applyReferenceToneMapping } from './referenceToneMapping'
 import { publicAsset } from '../app/publicAsset'
+import { WINTER_PROFILE } from '../app/performanceConfig'
 
 export type WinterPart = { geometry: BufferGeometry; material: Material | Material[] }
 type WinterModels = Record<string, WinterPart[]>
 const Context = createContext<WinterModels | null>(null)
-export const WINTER_PROFILE = (() => {
-  const explicit = new URLSearchParams(location.search).get('quality')
-  return explicit === 'high' || explicit === 'mobile' ? explicit : matchMedia('(max-width: 700px) and (pointer: coarse)').matches ? 'mobile' : 'high'
-})()
 const urls = ['floor', 'snow-cap', 'wreath', 'site', 'crane'].map(name => publicAsset(`winter/${WINTER_PROFILE}/winter-${name}.glb`))
 
 export function WinterAssets({ children }: { children: ReactNode }) {

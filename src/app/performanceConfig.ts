@@ -1,19 +1,23 @@
 import type { PerformanceMode } from '../game/types'
 
 export const PERFORMANCE_CONFIG = {
-  high: { dpr: [1, 2] as [number, number], shadows: false, shadowSize: 2048 },
+  high: { dpr: [1, 3] as [number, number], shadows: false, shadowSize: 2048 },
   medium: { dpr: [1, 1.5] as [number, number], shadows: false, shadowSize: 1024 },
   low: { dpr: [1, 1] as [number, number], shadows: false, shadowSize: 512 },
 } as const
 
 export function detectPerformanceMode(): PerformanceMode {
-  // Actual frame times choose the tier; CPU core count says little about GPU speed.
   return 'high'
 }
 
-// An explicit high preset is for reviewing the original assets, without the
-// frame-time governor silently lowering their screen resolution.
-export const MAX_QUALITY = new URLSearchParams(typeof location === 'undefined' ? '' : location.search).get('quality') === 'high'
+/** Desktop assets and resolution on every device. Lighter rendering is opt-in. */
+export function qualityPreset(search: string): 'high' | 'auto' | 'mobile' {
+  const preset = new URLSearchParams(search).get('quality')
+  return preset === 'auto' || preset === 'mobile' ? preset : 'high'
+}
+export const QUALITY_PRESET = qualityPreset(typeof location === 'undefined' ? '' : location.search)
+export const MAX_QUALITY = QUALITY_PRESET === 'high'
+export const WINTER_PROFILE = QUALITY_PRESET === 'mobile' ? 'mobile' : 'high'
 
 export function renderDpr(mode: PerformanceMode, maximum: boolean, nativeDpr: number, width: number, height: number) {
   const [min, max] = PERFORMANCE_CONFIG[mode].dpr

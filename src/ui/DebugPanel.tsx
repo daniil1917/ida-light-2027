@@ -14,6 +14,7 @@ import { audioManager } from '../audio/AudioManager'
 import { useCelebrationStore } from '../effects/celebrationStore'
 import { GREETINGS } from '../game/greetings'
 import { useState } from 'react'
+import { WINTER_PROFILE } from '../app/performanceConfig'
 
 export default function DebugPanel() {
   const [hidden, setHidden] = useState(false)
@@ -42,6 +43,7 @@ export default function DebugPanel() {
       <output aria-label="Диагностика игры">{state} · {phase} · этажи {count} · ошибки {mistakes} · {telegram}</output>
       <output aria-label="Диагностика сцены">вызовы отрисовки {stats.drawCalls} · геометрии {stats.geometries} · текстуры {stats.textures} · тела {stats.physicsBodies}</output>
       <output aria-label="Время кадра">{stats.fps.toFixed(1)} fps · медиана {stats.frameMedian.toFixed(1)} мс · p95 {stats.frameP95.toFixed(1)} мс · треугольники {stats.triangles} · буфер {stats.bufferWidth}×{stats.bufferHeight}</output>
+      <output aria-label="Качество рендера">Атласы: {WINTER_PROFILE} · DPR {stats.pixelRatio.toFixed(2)}</output>
       <output aria-label="Рывки движения">Рассинхронизация {stats.motionError.toFixed(4)} · max {stats.frameMax.toFixed(1)} мс · кадров дольше 25 мс: {stats.slowFrames}</output>
       <output aria-label="Обновления этажей">Обновления буферов этажей: {stats.instanceUploads.toFixed(1)} / кадр</output>
       <output aria-label="Диагностика финала">Финал: {cinematic}</output>

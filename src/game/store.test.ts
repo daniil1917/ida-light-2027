@@ -17,6 +17,32 @@ function dropAt(x: number) {
 }
 
 describe('game session invariants', () => {
+  it('retains a manual pause after backgrounding and only resumes when both pauses clear', () => {
+    const now = vi.spyOn(performance, 'now').mockReturnValue(1000)
+    try {
+      store.setState({ swingStartedAt: 0 })
+      store.getState().setPaused(true)
+      now.mockReturnValue(2000); store.getState().setBackgroundPaused(true)
+      now.mockReturnValue(3000); store.getState().setBackgroundPaused(false)
+      expect(store.getState().paused).toBe(true)
+      expect(swingPosition()).toBe(swingPosition(1000))
+      now.mockReturnValue(4000); store.getState().setPaused(false)
+      expect(store.getState().paused).toBe(false)
+      expect(store.getState().swingStartedAt).toBe(3000)
+    } finally { now.mockRestore() }
+  })
+  it('cannot resume in the background, including on replay', () => {
+    store.getState().setBackgroundPaused(true)
+    store.getState().setPaused(true)
+    store.getState().setPaused(false)
+    expect(store.getState().paused).toBe(true)
+    store.getState().release(0)
+    expect(store.getState().phase).toBe('swinging')
+    store.getState().start()
+    expect(store.getState().paused).toBe(true)
+    store.getState().setBackgroundPaused(false)
+    expect(store.getState().paused).toBe(false)
+  })
   it.each([false, true])('preserves the visible suspended floor when entering from the intro (paused %s)', paused => {
     store.getState().goToIntro()
     store.setState({ swingStartedAt: 1000, spawnSide: -1, paused, pausedAt: paused ? 2000 : null })

@@ -7,7 +7,7 @@ body { background: var(--ida-bg); color: var(--ida-text-primary); font-family: v
 button, input { font: inherit; }
 button { cursor: pointer; }
 button:disabled { cursor: default; opacity: 0.45; }
-.game-shell { position: relative; isolation: isolate; width: min(100%, 600px); height: var(--tg-viewport-stable-height, 100dvh); min-height: 0; margin: 0 auto; overflow: hidden; background: var(--ida-bg); touch-action: none; overscroll-behavior: none; }
+.game-shell { position: relative; isolation: isolate; width: min(100%, 600px); height: var(--tg-viewport-stable-height, 100dvh); min-height: 0; margin: 0 auto; overflow: hidden; background: var(--ida-bg); touch-action: manipulation; overscroll-behavior: none; }
 .game-shell::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, transparent calc(50% - .5px), rgb(255 255 255 / 4%) 50%, transparent calc(50% + .5px)); }
 .scene-area { position: absolute; inset: 0; outline-offset: -6px !important; }
 .scene-area[role='button'] { cursor: pointer; user-select: none; -webkit-user-select: none; }
@@ -135,6 +135,9 @@ body { background: var(--ida-black); }
 .intro h1 { margin: 0 0 12px; }
 .intro-copy p, .intro .title-dot { color: var(--ida-white); }
 .intro-copy p { text-wrap: initial; font-size: 16px; line-height: 1.5; }
+/* Keep the requested white lettering legible over the lightest part of the sky,
+   without adding a panel across the scene. The stroke paints behind the fill. */
+.intro h1, .intro-copy p { -webkit-text-stroke: 1px rgb(26 27 29 / 50%); paint-order: stroke fill; }
 .intro-copy { text-shadow: 0 1px 6px rgb(26 27 29 / 30%); }
 .intro h1 { display: flex; align-items: baseline; gap: .2em; font-size: clamp(32px, 9vw, 48px); }
 .intro h1 > span { font-size: 1em; }
@@ -183,6 +186,7 @@ body { background: var(--ida-black); }
 .postcard-fallback button { min-height: 44px; border: 0; border-radius: 8px; background: var(--ida-white); color: var(--ida-black); }
 @media (max-height: 680px) { .postcard-display { padding-block: 16px; } }
 @media (max-height: 480px) and (min-width: 480px) {
+  .intro-copy { inset-inline-end: auto; width: calc(44% - var(--ida-gutter)); }
   .postcard-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, .95fr); gap: 24px; }
   .postcard-display { padding: 8px; height: 100%; }
   .postcard-controls { align-self: center; }

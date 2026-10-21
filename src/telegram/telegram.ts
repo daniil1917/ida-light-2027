@@ -44,13 +44,14 @@ async function initialize(): Promise<TelegramConnection | null> {
           if (['playing', 'tutorial', 'celebration'].includes(state)) sdk.swipeBehavior.disableVertical.ifAvailable()
           else sdk.swipeBehavior.enableVertical.ifAvailable()
         }
-        const updateActivity = () => useGameStore.getState().setPaused(document.hidden || !sdk.miniApp.isActive())
+        const updateActivity = () => useGameStore.getState().setBackgroundPaused(document.hidden || !sdk.miniApp.isActive())
         const back = sdk.backButton.onClick.ifAvailable(() => useGameStore.getState().goToIntro())
         const stopStore = useGameStore.subscribe((current, previous) => { if (current.state !== previous.state) updateBack() })
         const stopActivity = sdk.miniApp.isActive.sub(updateActivity)
+        document.addEventListener('visibilitychange', updateActivity)
         updateBack()
         updateActivity()
-        return () => { stopStore(); stopActivity(); if (back.ok) back.data(); sdk.swipeBehavior.enableVertical.ifAvailable() }
+        return () => { stopStore(); stopActivity(); document.removeEventListener('visibilitychange', updateActivity); if (back.ok) back.data(); sdk.swipeBehavior.enableVertical.ifAvailable() }
       },
     }
   } catch {

@@ -33,6 +33,8 @@ interface GameStore {
   retryCount: number
   feedback: Feedback | null
   paused: boolean
+  userPaused: boolean
+  backgroundPaused: boolean
   pausedAt: number | null
   error: string | null
   ready: () => void
@@ -43,6 +45,7 @@ interface GameStore {
   nextFloor: (attemptId: number) => void
   openGreeting: (sessionId: number) => void
   setPaused: (paused: boolean) => void
+  setBackgroundPaused: (paused: boolean) => void
   reportError: (error: string) => void
   toggleSound: () => void
 }
@@ -50,7 +53,8 @@ interface GameStore {
 const initialRun = {
   floors: [] as PlacedFloor[], currentFloor: 0, mistakes: 0, perfectCount: 0,
   consecutivePerfects: 0, difficultyLevel: 1, releaseX: 0, retryCount: 0,
-  feedback: null, collapse: null as TowerCollapse | null, phase: 'swinging' as FloorPhase, paused: false, pausedAt: null,
+  feedback: null, collapse: null as TowerCollapse | null, phase: 'swinging' as FloorPhase,
+  paused: false, userPaused: false, pausedAt: null,
   spawnSide: 1 as 1 | -1,
   greetingId: null as string | null,
 }
@@ -59,7 +63,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   ...initialRun,
   state: 'loading', targetFloors: GAME_CONFIG.targetFloors, soundEnabled: readPreference('sound') !== 'off',
   hasSeenTutorial: readPreference('tutorial') === 'seen',
-  telegramUser: null, performanceMode: 'medium', telegramStatus: 'browser',
+  telegramUser: null, performanceMode: 'high', telegramStatus: 'browser', backgroundPaused: false,
   sessionId: 0, attemptId: 0, swingStartedAt: performance.now(), error: null,
   ready: () => { if (get().state === 'loading') set({ state: 'intro' }) },
   start: () => {
@@ -69,10 +73,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
     set({ ...initialRun, state: previous.hasSeenTutorial ? 'playing' : 'tutorial',
       spawnSide: fromIntro ? previous.spawnSide : previous.sessionId > 0 ? (previous.spawnSide === 1 ? -1 : 1) : 1,
       sessionId: previous.sessionId + 1, attemptId: previous.attemptId + 1,
+      paused: previous.backgroundPaused, pausedAt: previous.backgroundPaused ? now : null,
       swingStartedAt: fromIntro ? previous.swingStartedAt + (previous.pausedAt === null ? 0 : now - previous.pausedAt) : now, error: null })
   },
   goToIntro: () => set({ ...initialRun, state: 'intro', sessionId: get().sessionId + 1,
-    attemptId: get().attemptId + 1, swingStartedAt: performance.now() }),
+    attemptId: get().attemptId + 1, swingStartedAt: performance.now(),
+    paused: get().backgroundPaused, pausedAt: get().backgroundPaused ? performance.now() : null }),
   release: (x) => {
     const current = get()
     if (!['tutorial', 'playing'].includes(current.state) || current.phase !== 'swinging' || current.paused || !Number.isFinite(x)) return
@@ -126,10 +132,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
   setPaused: (paused) => {
     const current = get()
-    if (current.paused === paused) return
+    const effective = paused || current.backgroundPaused
+    if (current.paused === effective) { set({ userPaused: paused }); return }
     const now = performance.now()
-    set({ paused, pausedAt: paused ? now : null,
-      swingStartedAt: !paused && current.pausedAt !== null ? current.swingStartedAt + now - current.pausedAt : current.swingStartedAt })
+    set({ userPaused: paused, paused: effective, pausedAt: effective ? now : null,
+      swingStartedAt: !effective && current.pausedAt !== null ? current.swingStartedAt + now - current.pausedAt : current.swingStartedAt })
+  },
+  setBackgroundPaused: (backgroundPaused) => {
+    if (get().backgroundPaused === backgroundPaused) return
+    set({ backgroundPaused })
+    get().setPaused(get().userPaused)
   },
   reportError: (error) => set({ state: 'error', error }),
   toggleSound: () => {

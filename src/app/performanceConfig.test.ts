@@ -1,7 +1,20 @@
 import { describe, expect, it } from 'vitest'
-import { renderDpr } from './performanceConfig'
+import { qualityPreset, renderDpr, MAX_QUALITY, WINTER_PROFILE } from './performanceConfig'
 
 describe('render resolution', () => {
+  it('ships desktop quality by default, without a touch-screen downgrade', () => {
+    expect(qualityPreset('')).toBe('high')
+    expect(qualityPreset('?v=0.24.0')).toBe('high')
+    expect(qualityPreset('?quality=unknown')).toBe('high')
+    expect(MAX_QUALITY).toBe(true)
+    expect(WINTER_PROFILE).toBe('high')
+    expect(qualityPreset('?quality=auto')).toBe('auto')
+    expect(qualityPreset('?quality=mobile')).toBe('mobile')
+  })
+  it.each([[320, 568], [390, 844], [430, 932]])('renders mobile %s×%s as sharply as the desktop high preset', (width, height) => {
+    expect(renderDpr('high', true, 3, width, height)).toBe(3)
+    expect(renderDpr('high', false, 3, width, height)).toBe(3)
+  })
   it('supersamples an explicit high preset even on a standard screen', () => {
     expect(renderDpr('high', true, 1, 600, 844)).toBe(3)
     expect(renderDpr('high', true, 2, 600, 844)).toBe(3)

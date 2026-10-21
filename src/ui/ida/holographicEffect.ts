@@ -10,6 +10,7 @@ export function holographicEffect(scene: HTMLElement, card: HTMLElement, canvas:
   let draw: (() => void) | undefined
   let resizeGL: (() => void) | undefined
   let disposeGL: (() => void) | undefined
+  let releaseContext: (() => void) | undefined
 
   function render(time: number) {
     frame = 0
@@ -50,6 +51,7 @@ export function holographicEffect(scene: HTMLElement, card: HTMLElement, canvas:
     // transforms/compositing continue, instead of relying on a discarded buffer.
     const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false, antialias: false, depth: false, preserveDrawingBuffer: true })
     if (!gl || gl.isContextLost()) return
+    releaseContext = () => gl.getExtension('WEBGL_lose_context')?.loseContext()
     const shaders: WebGLShader[] = []
     const compile = (type: number, source: string) => {
       const shader = gl.createShader(type)
@@ -81,7 +83,7 @@ export function holographicEffect(scene: HTMLElement, card: HTMLElement, canvas:
     gl.uniform1i(gl.getUniformLocation(program, 'artwork'), 0)
     let ready = false
     resizeGL = () => {
-      const dpr = Math.min(devicePixelRatio || 1, 2)
+      const dpr = Math.min(devicePixelRatio || 1, 3)
       const width = Math.max(1, Math.round(scene.clientWidth * dpr))
       const height = Math.max(1, Math.round(scene.clientHeight * dpr))
       // Assigning even the same dimensions clears a WebGL drawing buffer.
@@ -148,7 +150,11 @@ export function holographicEffect(scene: HTMLElement, card: HTMLElement, canvas:
     },
     dispose() {
       events.abort(); observer.disconnect(); cancelAnimationFrame(frame)
-      disposeGL?.(); card.style.transform = ''; canvas.hidden = true
+      disposeGL?.()
+      // React StrictMode and preference changes reuse a connected canvas.
+      // Release the extra context only after a real DOM unmount, on replay.
+      queueMicrotask(() => { if (!canvas.isConnected) releaseContext?.() })
+      card.style.transform = ''; canvas.hidden = true
     },
   }
 }

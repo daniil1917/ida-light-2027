@@ -69,7 +69,7 @@ function SceneReady() {
       const sorted = [...frames.current].sort((a, b) => a - b)
       useSceneStats.setState({ drawCalls: renderer.info.render.calls, geometries: renderer.info.memory.geometries,
         textures: renderer.info.memory.textures, physicsBodies: world.bodies.len(), triangles: renderer.info.render.triangles,
-        bufferWidth: canvas.width, bufferHeight: canvas.height,
+        bufferWidth: canvas.width, bufferHeight: canvas.height, pixelRatio: renderer.getPixelRatio(),
         fps: sorted.length ? 1000 * sorted.length / sorted.reduce((a, b) => a + b, 0) : 0,
         frameMedian: sorted[Math.floor(sorted.length * .5)] ?? 0, frameP95: sorted[Math.floor(sorted.length * .95)] ?? 0,
         frameMax: sorted.at(-1) ?? 0, slowFrames: sorted.filter(frame => frame > 25).length,

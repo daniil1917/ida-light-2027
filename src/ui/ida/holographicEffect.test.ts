@@ -4,6 +4,7 @@ import { holographicEffect } from './holographicEffect'
 class Element extends EventTarget {
   style = { transform: '' }
   hidden = false
+  isConnected = false
   clientWidth = 289
   clientHeight = 410
   context: WebGLRenderingContext | null = null
@@ -116,8 +117,9 @@ it('keeps the foil usable but disables physical tilt and scale with reduced moti
   key(card, 'ArrowRight'); flush()
   expect(card.style.transform).toBe('rotateX(0.0000deg) rotateY(0.0000deg) scale(1.00000)')
 })
-it('preserves the last GPU frame and does not clear it on an unchanged resize', () => {
-  const noop = () => {}, resource = () => ({}), draw = vi.fn()
+it.each([[2, false], [3, false], [3, true]] as const)('preserves DPR %s and releases only detached canvases (connected %s)', async (dpr, connected) => {
+  vi.stubGlobal('devicePixelRatio', dpr)
+  const noop = () => {}, resource = () => ({}), draw = vi.fn(), loseContext = vi.fn()
   const context = {
     isContextLost: () => false, createShader: resource, shaderSource: noop, compileShader: noop,
     getShaderParameter: () => true, createProgram: resource, createBuffer: resource, createTexture: resource,
@@ -126,20 +128,26 @@ it('preserves the last GPU frame and does not clear it on an unchanged resize', 
     vertexAttribPointer: noop, getUniformLocation: resource, bindTexture: noop, texParameteri: noop,
     uniform1i: noop, texImage2D: noop, viewport: noop, uniform2f: noop, uniform1f: noop, drawArrays: draw,
     deleteTexture: noop, deleteBuffer: noop, deleteProgram: noop, deleteShader: noop,
+    getExtension: () => ({ loseContext }),
   } as unknown as WebGLRenderingContext
-  const { scene, canvas } = mount(false, context)
+  const { scene, canvas, effect } = mount(false, context)
+  canvas.isConnected = connected
   flush()
   expect(canvas.contextOptions?.preserveDrawingBuffer).toBe(true)
   expect(canvas.hidden).toBe(false)
-  expect(canvas.width).toBe(578)
+  expect(canvas.width).toBe(289 * dpr)
   const writes = canvas.widthWrites
   resize(); flush()
   expect(canvas.widthWrites).toBe(writes)
   expect(draw).toHaveBeenCalledTimes(2)
   scene.clientWidth = 300
   resize(); flush()
-  expect(canvas.width).toBe(600)
+  expect(canvas.width).toBe(300 * dpr)
   expect(canvas.hidden).toBe(false)
+  effect.dispose(); cleanup = undefined
+  expect(loseContext).not.toHaveBeenCalled()
+  await Promise.resolve()
+  expect(loseContext).toHaveBeenCalledTimes(connected ? 0 : 1)
 })
 it('retains the active light position when the tab is hidden and restored', () => {
   const { card } = mount()
