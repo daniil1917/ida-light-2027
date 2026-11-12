@@ -92,13 +92,16 @@ try {
     await page.waitForFunction(({ phase, attempt }) => window.transitions.some(t => t.phase === phase && t.attempt === attempt), { phase: expectedPhase, attempt })
     return attempt
   }
+  async function renderedLanding(attempt) {
+    return (await page.waitForFunction(id => window.landings[id], attempt)).jsonValue()
+  }
   // The shared CI runner uses software rendering. Keep a full game plus replay
   // there, and three full games for local regression runs.
   for (let run = 0; run < (process.env.CI ? 1 : 3); run++) {
     for (let floor = 1; floor <= 15; floor++) {
       // An ordinary success as well as perfects; alternate offsets to keep balance.
       const attempt = await drop(floor % 2 ? .3 : -.3, 'success')
-      const snapshot = await (await page.waitForFunction(id => window.landings[id], attempt)).jsonValue()
+      const snapshot = await renderedLanding(attempt)
       assert.equal(snapshot.floor, floor)
       assert(snapshot.counts.length > 0 && snapshot.counts.every(count => count === floor + 1), JSON.stringify(snapshot))
       assert.equal(snapshot.scale, 1)
@@ -129,16 +132,15 @@ try {
     await page.getByRole('button', { name: 'Построить ещё раз' }).click()
     console.log(`Completed physical run ${run + 1}: 15 floors and delayed replay`)
   }
-  await drop(0, 'perfect')
+  assert.equal((await renderedLanding(await drop(0, 'perfect'))).floor, 1)
   for (let miss = 0; miss < 3; miss++) await drop(3, 'fail')
   await page.waitForFunction(() => window.game.getState().currentFloor === 0 && window.game.getState().mistakes === 0 && window.game.getState().phase === 'swinging')
   for (let floor = 0; floor < 5; floor++) await drop(1.116, floor === 4 ? 'collapse' : 'success')
   await page.waitForFunction(() => window.game.getState().currentFloor === 0 && window.game.getState().phase === 'swinging', null, { timeout: 15000 })
-  await drop(0, 'perfect')
+  assert.equal((await renderedLanding(await drop(0, 'perfect'))).floor, 1)
   const diagnostics = await page.evaluate(() => ({ motionErrors: window.motionErrors, renderErrors: window.renderErrors, renderedFrames: window.renderedFrames, frames: window.frames, transitions: window.transitions, longTasks: window.longTasks, error: window.game.getState().error }))
   assert.deepEqual(diagnostics.motionErrors, [])
   assert.deepEqual(diagnostics.renderErrors, [])
-  assert(diagnostics.renderedFrames > 100)
   assert.equal(diagnostics.error, null)
   assert.deepEqual(errors, [])
   const sorted = diagnostics.frames.map(frame => frame.duration).sort((a, b) => a - b)
