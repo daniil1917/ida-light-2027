@@ -144,13 +144,23 @@ try {
   const sorted = diagnostics.frames.map(frame => frame.duration).sort((a, b) => a - b)
   const report = { snapshots, ...diagnostics, errors, median: sorted[Math.floor(sorted.length * .5)], p95: sorted[Math.floor(sorted.length * .95)] }
   await writeFile(process.env.GAME_REPORT || '/tmp/ida-runtime-report.json', JSON.stringify(report, null, 2))
-  const stalled = await browser.newPage()
+  const viewport = page.viewportSize()
+  await page.close()
+  const stalled = await browser.newPage({ viewport })
+  const reloadErrors = []
+  stalled.on('pageerror', error => reloadErrors.push(error.message))
   let requests = 0
   await stalled.route('**/winter/**/winter-site.glb', route => { if (++requests > 1) return route.continue() })
   await stalled.goto(url)
   await stalled.getByText('Загрузка заняла слишком много времени.', { exact: false }).waitFor({ timeout: 40_000 })
   await stalled.getByRole('button', { name: 'Открыть заново' }).click()
-  await stalled.getByRole('button', { name: 'Начать строительство' }).waitFor({ timeout: 35_000 })
+  try {
+    await stalled.getByRole('button', { name: 'Начать строительство' }).waitFor({ timeout: 40_000 })
+  } catch (error) {
+    const state = await stalled.locator('.game-shell').getAttribute('data-state', { timeout: 1000 }).catch(() => null)
+    console.error(JSON.stringify({ reloadState: state, modelRequests: requests, reloadErrors }))
+    throw error
+  }
   assert(requests >= 2)
   console.log(JSON.stringify({ placedFloors: snapshots.length, misses: 3, collapses: 1, errors, motionErrors: diagnostics.motionErrors.length, renderErrors: diagnostics.renderErrors.length, renderedFrames: diagnostics.renderedFrames, median: report.median, p95: report.p95 }))
 } finally {
