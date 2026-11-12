@@ -95,7 +95,7 @@ body { background: var(--ida-black); }
 
 .feedback-container > span > span { display: inline-flex; align-items: center; gap: 6px; }
 
-.header-actions button, .intro-action button, .postcard-controls button, .share-dialog button { touch-action: manipulation; }
+.header-actions button, .intro-action button, .postcard-controls :is(button, a), .share-dialog button { touch-action: manipulation; }
 
 .intro-copy p { color: var(--ida-black); }
 
@@ -184,6 +184,6 @@ body { background: var(--ida-black); }
   .postcard-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, .95fr); gap: 24px; }
   .postcard-display { padding: 8px; height: 100%; }
   .postcard-controls { align-self: center; }
-  .postcard-controls button svg { display: none; }
+  .postcard-controls :is(button, a) svg { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .holo-card { will-change: auto; } }

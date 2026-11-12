@@ -55,8 +55,7 @@ describe('game session invariants', () => {
       expect(store.getState().paused).toBe(false)
     } finally { now.mockRestore() }
   })
-  it.each([null, { id: 123456, firstName: 'Игрок' }])('draws once at victory and changes on replay for user %s', user => {
-    store.setState({ telegramUser: user })
+  it('draws once at victory and changes on replay', () => {
     const sessionId = store.getState().sessionId
     store.getState().openGreeting(sessionId)
     expect(store.getState().greetingId).toBeNull()

@@ -6,7 +6,7 @@ import { readPreference, writePreference } from './storage'
 import { getDifficulty } from './difficulty'
 import { selectGreeting } from './greetings'
 import { findTowerCollapse, type TowerCollapse } from './stability'
-import type { Feedback, FloorPhase, GameState, PerformanceMode, PlacedFloor, TelegramUser } from './types'
+import type { Feedback, FloorPhase, GameState, PerformanceMode, PlacedFloor } from './types'
 
 interface GameStore {
   state: GameState
@@ -22,7 +22,6 @@ interface GameStore {
   soundEnabled: boolean
   hasSeenTutorial: boolean
   greetingId: string | null
-  telegramUser: TelegramUser | null
   performanceMode: PerformanceMode
   telegramStatus: 'browser' | 'connected' | 'unavailable'
   sessionId: number
@@ -63,7 +62,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   ...initialRun,
   state: 'loading', targetFloors: GAME_CONFIG.targetFloors, soundEnabled: readPreference('sound') !== 'off',
   hasSeenTutorial: readPreference('tutorial') === 'seen',
-  telegramUser: null, performanceMode: 'high', telegramStatus: 'browser', backgroundPaused: false,
+  performanceMode: 'high', telegramStatus: 'browser', backgroundPaused: false,
   sessionId: 0, attemptId: 0, swingStartedAt: performance.now(), error: null,
   ready: () => { if (get().state === 'loading') set({ state: 'intro' }) },
   start: () => {

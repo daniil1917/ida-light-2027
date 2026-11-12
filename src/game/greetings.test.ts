@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { GREETINGS, greetingName } from './greetings'
+import { GREETINGS } from './greetings'
 
 let values: Map<string, string>
 beforeEach(() => {
@@ -40,10 +40,5 @@ describe('postcard draws per victory', () => {
     values.set('ida-2027:last-greeting', 'removed-card')
     const selected = (await import('./greetings')).selectGreeting()
     expect(GREETINGS).toContainEqual(selected)
-  })
-  it('uses a bounded, clean display name without control or direction characters', () => {
-    expect(greetingName({ id: 1, firstName: '  Мария\u202e\u0000 ' })).toBe('Мария')
-    expect(greetingName({ id: 1, firstName: '🙂'.repeat(100) })).toBe('🙂'.repeat(32))
-    expect(greetingName(null)).toBeNull()
   })
 })
