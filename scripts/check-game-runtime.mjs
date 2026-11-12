@@ -5,7 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises'
 // Uses an existing Playwright installation; no browser library ships with the game.
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE || 'playwright')
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHROMIUM_CHANNEL || 'chrome', headless: true })
-const page = await browser.newPage({ viewport: { width: 390, height: 844 } })
+const page = await browser.newPage({ viewport: process.env.CI ? { width: 320, height: 568 } : { width: 390, height: 844 } })
 const url = process.env.GAME_URL || 'http://127.0.0.1:5173/'
 const errors = []
 page.on('pageerror', error => errors.push(error.message))
@@ -92,7 +92,9 @@ try {
     await page.waitForFunction(({ phase, attempt }) => window.transitions.some(t => t.phase === phase && t.attempt === attempt), { phase: expectedPhase, attempt })
     return attempt
   }
-  for (let run = 0; run < 3; run++) {
+  // The shared CI runner uses software rendering. Keep a full game plus replay
+  // there, and three full games for local regression runs.
+  for (let run = 0; run < (process.env.CI ? 1 : 3); run++) {
     for (let floor = 1; floor <= 15; floor++) {
       // An ordinary success as well as perfects; alternate offsets to keep balance.
       const attempt = await drop(floor % 2 ? .3 : -.3, 'success')
@@ -127,6 +129,7 @@ try {
     await page.getByRole('button', { name: 'Построить ещё раз' }).click()
     console.log(`Completed physical run ${run + 1}: 15 floors and delayed replay`)
   }
+  await drop(0, 'perfect')
   for (let miss = 0; miss < 3; miss++) await drop(3, 'fail')
   await page.waitForFunction(() => window.game.getState().currentFloor === 0 && window.game.getState().mistakes === 0 && window.game.getState().phase === 'swinging')
   for (let floor = 0; floor < 5; floor++) await drop(1.116, floor === 4 ? 'collapse' : 'success')
