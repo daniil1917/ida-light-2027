@@ -1,5 +1,4 @@
 import { readPreference, writePreference } from './storage'
-import type { TelegramUser } from './types'
 import { publicAsset } from '../app/publicAsset'
 
 export interface Greeting { id: string; title: string; text: string; artwork: string; alt: string }
@@ -26,9 +25,4 @@ export function selectGreeting(): Greeting {
   lastGreetingId = selected.id
   writePreference('last-greeting', selected.id)
   return selected
-}
-
-export function greetingName(user: TelegramUser | null): string | null {
-  const name = user?.firstName.replace(/[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u202a-\u202e\u2066-\u2069]/g, '').trim()
-  return name ? Array.from(name).slice(0, 32).join('') : null
 }

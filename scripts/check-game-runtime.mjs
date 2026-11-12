@@ -1,15 +1,16 @@
 import assert from 'node:assert/strict'
 import { createRequire } from 'node:module'
-import { writeFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 
 // Uses an existing Playwright installation; no browser library ships with the game.
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE || 'playwright')
-const browser = await chromium.launch({ channel: 'chrome', headless: true })
-const page = await browser.newPage({ viewport: { width: 390, height: 844 } })
+const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHROMIUM_CHANNEL || 'chrome', headless: true })
+const page = await browser.newPage({ viewport: process.env.CI ? { width: 320, height: 568 } : { width: 390, height: 844 } })
+const url = process.env.GAME_URL || 'http://127.0.0.1:5173/'
 const errors = []
 page.on('pageerror', error => errors.push(error.message))
 try {
-  await page.goto(process.env.GAME_URL || 'http://127.0.0.1:5173/')
+  await page.goto(url)
   await page.getByRole('button', { name: 'Начать строительство' }).waitFor({ timeout: 60000 })
   const textStyle = await page.locator('.intro-copy p').evaluate(element => {
     const style = getComputedStyle(element)
@@ -22,6 +23,7 @@ try {
     const url = source.match(/from "([^"]*@react-three_fiber[^"]*)"/)[1]
     window.three = (await import(url))._roots.get(document.querySelector('canvas')).store
     window.frames = []; window.motionErrors = []; window.renderErrors = []; window.renderedFrames = 0; window.transitions = []; window.longTasks = []
+    window.landings = {}
     const state = window.three.getState(), render = state.gl.render.bind(state.gl)
     const meshIds = state.scene.getObjectByName('StaticTower').children.map(mesh => mesh.uuid)
     state.gl.render = (scene, camera) => {
@@ -39,6 +41,16 @@ try {
           }
         })
         if (active.children.length) window.renderErrors.push('Duplicate non-instanced floor model')
+        if (!moving && !window.landings[game.attemptId]) {
+          const transition = state.scene.getObjectByName('Finished house to postcard')
+          const matrix = tower.children[0].instanceMatrix.array
+          window.landings[game.attemptId] = {
+            run: game.sessionId, floor: game.currentFloor, phase: game.phase,
+            counts: tower.children.filter(mesh => mesh.name !== 'Static_Wreath').map(mesh => mesh.count),
+            positions: Array.from({ length: expected }, (_, i) => matrix[i * 16 + 13]),
+            scale: transition.scale.x, visible: transition.visible,
+          }
+        }
       }
       return render(scene, camera)
     }
@@ -46,7 +58,7 @@ try {
       for (const entry of list.getEntries()) window.longTasks.push({ duration: entry.duration, phase: window.game.getState().phase })
     }).observe({ entryTypes: ['longtask'] })
     window.game.subscribe((game, previous) => {
-      if (game.phase !== previous.phase) window.transitions.push({ at: performance.now(), phase: game.phase, floor: game.currentFloor, session: game.sessionId })
+      if (game.phase !== previous.phase) window.transitions.push({ at: performance.now(), phase: game.phase, floor: game.currentFloor, session: game.sessionId, attempt: game.attemptId })
     })
     let previous = performance.now()
     function sample(now) {
@@ -72,29 +84,38 @@ try {
   const snapshots = []
   async function drop(offset, expectedPhase) {
     await page.waitForFunction(() => window.game.getState().phase === 'swinging')
-    await page.evaluate(x => window.game.getState().release((window.game.getState().floors.at(-1)?.x ?? 0) + x), offset)
-    await page.waitForFunction(phase => window.game.getState().phase === phase, expectedPhase)
-    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+    const attempt = await page.evaluate(x => {
+      const game = window.game.getState()
+      game.release((game.floors.at(-1)?.x ?? 0) + x)
+      return game.attemptId
+    }, offset)
+    await page.waitForFunction(({ phase, attempt }) => window.transitions.some(t => t.phase === phase && t.attempt === attempt), { phase: expectedPhase, attempt })
+    return attempt
   }
-  for (let run = 0; run < 3; run++) {
+  // The shared CI runner uses software rendering. Keep a full game plus replay
+  // there, and three full games for local regression runs.
+  for (let run = 0; run < (process.env.CI ? 1 : 3); run++) {
     for (let floor = 1; floor <= 15; floor++) {
       // An ordinary success as well as perfects; alternate offsets to keep balance.
-      await drop(floor % 2 ? .3 : -.3, 'success')
-      const snapshot = await page.evaluate(() => {
-        const game = window.game.getState(), scene = window.three.getState().scene
-        const counts = []; scene.traverse(object => { if (object.name === 'Static_Body' || object.name === 'Static_Snow') counts.push(object.count) })
-        const transition = scene.getObjectByName('Finished house to postcard')
-        const positions = []; scene.getObjectByName('StaticTower').children[0].instanceMatrix.array.forEach((value, i) => { if (i % 16 === 13 && i / 16 < game.floors.length + 1) positions.push(value) })
-        return { run: game.sessionId, floor: game.currentFloor, counts, positions, scale: transition.scale.x, visible: transition.visible }
-      })
+      const attempt = await drop(floor % 2 ? .3 : -.3, 'success')
+      const snapshot = await (await page.waitForFunction(id => window.landings[id], attempt)).jsonValue()
       assert.equal(snapshot.floor, floor)
-      assert(snapshot.counts.length > 0 && snapshot.counts.every(count => count === floor + 1))
+      assert(snapshot.counts.length > 0 && snapshot.counts.every(count => count === floor + 1), JSON.stringify(snapshot))
       assert.equal(snapshot.scale, 1)
       assert.equal(snapshot.visible, true)
       snapshot.positions.forEach((y, i) => assert(Math.abs(y - (.675 + i * 1.35)) < .0001))
       snapshots.push(snapshot)
     }
     await page.getByRole('button', { name: 'Построить ещё раз' }).waitFor({ timeout: 30000 })
+    await page.waitForFunction(() => document.activeElement?.classList.contains('holo-card'))
+    if (run === 0) {
+      const save = page.getByRole('link', { name: 'Сохранить открытку' })
+      const [download] = await Promise.all([page.waitForEvent('download'), save.click()])
+      const artwork = await save.getAttribute('href')
+      assert.deepEqual(await readFile(await download.path()), await readFile(`public${artwork}`))
+      assert.equal(await page.getByRole('link', { name: 'открой оригинал' }).getAttribute('href'), artwork)
+      assert.equal(await page.getByText('Открытка сохранена', { exact: false }).count(), 0)
+    }
     const cardFocus = await page.locator('.holo-card').evaluate(element => {
       const shadow = getComputedStyle(element).boxShadow
       element.focus(); const style = getComputedStyle(element)
@@ -108,6 +129,7 @@ try {
     await page.getByRole('button', { name: 'Построить ещё раз' }).click()
     console.log(`Completed physical run ${run + 1}: 15 floors and delayed replay`)
   }
+  await drop(0, 'perfect')
   for (let miss = 0; miss < 3; miss++) await drop(3, 'fail')
   await page.waitForFunction(() => window.game.getState().currentFloor === 0 && window.game.getState().mistakes === 0 && window.game.getState().phase === 'swinging')
   for (let floor = 0; floor < 5; floor++) await drop(1.116, floor === 4 ? 'collapse' : 'success')
@@ -122,6 +144,24 @@ try {
   const sorted = diagnostics.frames.map(frame => frame.duration).sort((a, b) => a - b)
   const report = { snapshots, ...diagnostics, errors, median: sorted[Math.floor(sorted.length * .5)], p95: sorted[Math.floor(sorted.length * .95)] }
   await writeFile(process.env.GAME_REPORT || '/tmp/ida-runtime-report.json', JSON.stringify(report, null, 2))
+  const viewport = page.viewportSize()
+  await page.close()
+  const stalled = await browser.newPage({ viewport })
+  const reloadErrors = []
+  stalled.on('pageerror', error => reloadErrors.push(error.message))
+  let requests = 0
+  await stalled.route('**/winter/**/winter-site.glb', route => { if (++requests > 1) return route.continue() })
+  await stalled.goto(url)
+  await stalled.getByText('Загрузка заняла слишком много времени.', { exact: false }).waitFor({ timeout: 40_000 })
+  await stalled.getByRole('button', { name: 'Открыть заново' }).click()
+  try {
+    await stalled.getByRole('button', { name: 'Начать строительство' }).waitFor({ timeout: 40_000 })
+  } catch (error) {
+    const state = await stalled.locator('.game-shell').getAttribute('data-state', { timeout: 1000 }).catch(() => null)
+    console.error(JSON.stringify({ reloadState: state, modelRequests: requests, reloadErrors }))
+    throw error
+  }
+  assert(requests >= 2)
   console.log(JSON.stringify({ placedFloors: snapshots.length, misses: 3, collapses: 1, errors, motionErrors: diagnostics.motionErrors.length, renderErrors: diagnostics.renderErrors.length, renderedFrames: diagnostics.renderedFrames, median: report.median, p95: report.p95 }))
 } finally {
   await browser.close()

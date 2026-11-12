@@ -54,6 +54,14 @@ function GameLifecycle() {
   const collapse = useGameStore(s => s.collapse)
   const floors = useGameStore(s => s.floors)
   useEffect(() => {
+    if (state !== 'loading' || !webGLSupported) return
+    const timeout = window.setTimeout(() => {
+      const game = useGameStore.getState()
+      if (game.state === 'loading') game.reportError('Загрузка заняла слишком много времени. Проверь соединение и открой игру заново.')
+    }, 30_000)
+    return () => window.clearTimeout(timeout)
+  }, [state])
+  useEffect(() => {
     if (state !== 'playing' || paused || !['fail', 'success', 'perfect', 'collapse'].includes(phase)) return
     const timer = window.setTimeout(() => useGameStore.getState().nextFloor(attemptId),
       phase === 'collapse' && collapse ? collapseDurationMs(floors, collapse) : phase === 'fail' ? mistakes >= GAME_CONFIG.maxLives ? GAME_CONFIG.restartDelayMs : GAME_CONFIG.retryDelayMs : GAME_CONFIG.successDelayMs)

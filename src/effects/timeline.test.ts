@@ -10,12 +10,17 @@ describe('celebration timeline', () => {
     expect(celebrationPhase(3.3, false)).toBe('confetti')
     expect(celebrationPhase(4.9, false)).toBe('ready')
   })
-  it('pauses elapsed animation time and never jumps across background time', () => {
+  it('pauses elapsed animation time and limits jumps after long stalls', () => {
     const clock = new CelebrationClock(); clock.begin(1, false)
     clock.advance(.02, false); clock.advance(20, true)
     expect(clock.elapsed).toBe(.02)
     clock.advance(20, false)
-    expect(clock.elapsed).toBeCloseTo(.07)
+    expect(clock.elapsed).toBeCloseTo(1.02)
+  })
+  it('reaches the postcard in five seconds even when rendering two frames per second', () => {
+    const clock = new CelebrationClock(); clock.begin(1, false)
+    for (let frame = 0; frame < 10; frame++) clock.advance(.5, false)
+    expect(celebrationPhase(clock.elapsed, false)).toBe('ready')
   })
   it('preserves a session on re-render, resets on replay, and clears at exit', () => {
     const clock = new CelebrationClock(); clock.begin(1, false); clock.advance(.04, false)

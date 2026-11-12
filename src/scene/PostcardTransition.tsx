@@ -4,6 +4,7 @@ import { useReducedMotion } from 'motion/react'
 import type { Group } from 'three'
 import { useGameStore } from '../game/store'
 import { GAME_CONFIG as G } from '../game/gameConfig'
+import { CELEBRATION } from '../effects/celebrationConfig'
 import { CRANE_BOOM_HEIGHT } from './craneLayout'
 
 /** Recede the finished miniature behind the card. Snow and sky stay continuous. */
@@ -28,7 +29,7 @@ export function PostcardTransition({ children }: { children: ReactNode }) {
     const greeting = game.state === 'greeting'
     if (!greeting) progress.current = 0
     else if (reduced) progress.current = 1
-    else if (!game.paused) progress.current = Math.min(1, progress.current + Math.min(delta, .05) / .9)
+    else if (!game.paused) progress.current = Math.min(1, progress.current + Math.min(delta, CELEBRATION.maxFrameDelta) / .9)
     const p = progress.current, eased = p * p * (3 - 2 * p)
     const scale = 1 - eased * .84
     const pivotY = (CRANE_BOOM_HEIGHT + game.currentFloor * G.floorHeight) / 2

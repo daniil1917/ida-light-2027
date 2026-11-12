@@ -17,7 +17,6 @@ async function initialize(): Promise<TelegramConnection | null> {
     sdk.init()
     sdk.themeParams.mount.ifAvailable()
     sdk.miniApp.mount.ifAvailable()
-    sdk.initData.restore()
     if (!sdk.themeParams.isCssVarsBound()) sdk.themeParams.bindCssVars.ifAvailable()
     sdk.miniApp.setBgColor.ifAvailable(VISUAL_CONFIG.background)
     sdk.miniApp.setHeaderColor.ifAvailable(VISUAL_CONFIG.background)
@@ -25,10 +24,7 @@ async function initialize(): Promise<TelegramConnection | null> {
     sdk.miniApp.ready.ifAvailable()
     sdk.backButton.mount.ifAvailable()
     sdk.swipeBehavior.mount.ifAvailable()
-    const user = sdk.initData.user()
-    useGameStore.setState({ telegramStatus: 'connected', telegramUser: user ? {
-      id: user.id, firstName: user.first_name, lastName: user.last_name,
-    } : null })
+    useGameStore.setState({ telegramStatus: 'connected' })
     // An old client or viewport timeout uses the browser's dvh/env fallback.
     try {
       if (sdk.viewport.mount.isAvailable() && !sdk.viewport.isMounted()) await sdk.viewport.mount({ timeout: 1800 })
