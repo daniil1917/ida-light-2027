@@ -42,7 +42,7 @@
     "howler": "^2.2.4",
     "lucide-react": "^1.52.0",
     "motion": "^12.0.0",
-    "postprocessing": "^6.39.5",
+    "postprocessing": "^6.39.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwind-merge": "^3.7.0",
